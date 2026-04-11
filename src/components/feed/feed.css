@@ -1,0 +1,8 @@
+.feed-view {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px;
+  max-width: 680px;
+  margin: 0 auto;
+}

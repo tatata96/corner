@@ -1,0 +1,107 @@
+.card {
+  background-color: var(--card-bg);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Grid variant ── */
+
+.card--grid {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-sm);
+}
+
+.card--grid:hover .card__overlay {
+  opacity: 1;
+}
+
+/* ── Feed variant ── */
+
+.card--feed {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-sm);
+}
+
+.card--feed:hover .card__overlay {
+  opacity: 1;
+}
+
+/* ── Diagonal line (placeholder) ── */
+
+.card__diagonal {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.card__diagonal::before,
+.card__diagonal::after {
+  content: '';
+  position: absolute;
+  background: var(--card-border);
+}
+
+.card__diagonal::before {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  left: 0;
+  transform: rotate(calc(atan2(var(--h, 1), var(--w, 1))));
+  transform-origin: left center;
+}
+
+/* ── Checkerboard badge ── */
+
+.card__checker {
+  position: absolute;
+  bottom: var(--space-sm);
+  left: var(--space-sm);
+  width: 28px;
+  height: 36px;
+  background-image:
+    linear-gradient(45deg, #555 25%, transparent 25%),
+    linear-gradient(-45deg, #555 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #555 75%),
+    linear-gradient(-45deg, transparent 75%, #555 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+  background-color: #888;
+  opacity: 0.55;
+}
+
+/* ── Hover info overlay ── */
+
+.card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-sm);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.card__title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.card__meta {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.55);
+}

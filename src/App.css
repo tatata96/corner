@@ -1,0 +1,33 @@
+.app {
+  position: relative;
+  padding-top: var(--nav-h);
+  min-height: 100dvh;
+}
+
+/* Full-screen click catcher — sits above the header, below the overlay.
+   Clicking anywhere outside the cards closes the current view. */
+.app__backdrop {
+  position: fixed;
+  inset: 0;
+  top: var(--nav-h);
+  z-index: 9;
+  cursor: default;
+}
+
+/* The overlay has no background — dark card backgrounds float over the
+   landing title, letting the mint text bleed through the gutters. */
+.app__overlay {
+  position: fixed;
+  inset: 0;
+  top: var(--nav-h);
+  overflow-y: auto;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.app__overlay--open {
+  opacity: 1;
+  pointer-events: all;
+}
