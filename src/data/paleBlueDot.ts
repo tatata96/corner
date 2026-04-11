@@ -15,24 +15,23 @@ It has been said that astronomy is a humbling and character-building experience.
 
 export type PaleBlueDotWord = {
   readonly word: string;
-  /** Index of the sentence this word belongs to (same index → same trail color). */
-  readonly sentenceIndex: number;
+  /** Index of the punctuation group this word belongs to (same index -> same trail color). */
+  readonly colorGroupIndex: number;
 };
 
 function buildTaggedWords(source: string): PaleBlueDotWord[] {
   const normalized = source.replace(/\s+/g, ' ').trim();
-  const sentences = normalized.split(/(?<=[.!?])\s+/).filter(Boolean);
   const out: PaleBlueDotWord[] = [];
-  for (let s = 0; s < sentences.length; s++) {
-    const words = sentences[s].split(/\s+/).filter(Boolean);
-    for (const word of words) {
-      out.push({ word, sentenceIndex: s });
-    }
+  let colorGroupIndex = 0;
+  const words = normalized.split(/\s+/).filter(Boolean);
+  for (const word of words) {
+    out.push({ word, colorGroupIndex });
+    if (/[.,]$/.test(word)) colorGroupIndex += 1;
   }
   return out;
 }
 
-/** Words in reading order with sentence grouping for styling. */
+/** Words in reading order with punctuation grouping for styling. */
 export const PALE_BLUE_DOT_TAGGED: readonly PaleBlueDotWord[] = buildTaggedWords(RAW);
 
 /** Plain word list (same order as `PALE_BLUE_DOT_TAGGED`). */

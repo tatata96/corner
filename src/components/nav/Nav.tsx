@@ -29,16 +29,25 @@ function Nav({ view, onViewChange }: NavProps) {
       </div>
 
       <div className="nav__links">
-        <a href="mailto:info@intermedia.foundation" className="nav__link">email</a>
-
         <a
-          href="https://instagram.com"
+          href="https://github.com/tatata96"
           target="_blank"
           rel="noopener noreferrer"
           className="nav__link"
         >
-          ig
+          github
         </a>
+
+        <a
+          href="https://www.linkedin.com/in/tamara-kozok/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="nav__link"
+        >
+          linkedin
+        </a>
+
+        <a href="mailto:tamarakozok@gmail.com" className="nav__link">email</a>
       </div>
     </nav>
   );
