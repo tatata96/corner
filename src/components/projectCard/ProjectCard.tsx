@@ -4,11 +4,18 @@ import './projectCard.css';
 interface ProjectCardProps {
   project: Project;
   variant?: 'grid' | 'feed';
+  onSelect: (project: Project) => void;
 }
 
-function ProjectCard({ project, variant = 'grid' }: ProjectCardProps) {
+function ProjectCard({ project, variant = 'grid', onSelect }: ProjectCardProps) {
   return (
-    <article className={`card card--${variant}`}>
+    <article
+      className={`card card--${variant}`}
+      onClick={() => onSelect(project)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === 'Enter' && onSelect(project)}
+    >
       <div className="card__diagonal" aria-hidden="true" />
 
       <div className="card__checker" aria-hidden="true" />

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detail Page Concepts</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0c0c0c;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    padding: 32px 24px 80px;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #4DFFA0;
+    margin-bottom: 6px;
+  }
+  .sub {
+    color: #555;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 36px;
+  }
+
+  .concepts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+  }
+
+  .concept {
+    border: 1px solid #222;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    overflow: hidden;
+    position: relative;
+  }
+  .concept:hover { border-color: #4DFFA0; transform: translateY(-2px); }
+  .concept.selected { border-color: #4DFFA0; box-shadow: 0 0 0 1px #4DFFA0; }
+  .concept.selected::after {
+    content: '✓ selected';
+    position: absolute;
+    top: 10px; right: 10px;
+    background: #4DFFA0;
+    color: #000;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    padding: 2px 7px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .concept-label {
+    padding: 12px 14px 8px;
+    background: #111;
+    border-bottom: 1px solid #1e1e1e;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .concept-letter {
+    font-size: 0.6rem;
+    color: #4DFFA0;
+    letter-spacing: 0.15em;
+    border: 1px solid #4DFFA0;
+    padding: 1px 5px;
+  }
+  .concept-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 300;
+    color: #eee;
+  }
+
+  .mockup {
+    width: 100%;
+    aspect-ratio: 4/3;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── CONCEPT A: The Fold (full-screen, horizontal split) ── */
+  .fold-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 42%;
+    background: #C9C4BB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .fold-top-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 9rem;
+    font-weight: 300;
+    color: rgba(42,37,34,0.12);
+    line-height: 1;
+    user-select: none;
+    position: absolute;
+    right: -10px;
+    bottom: -20px;
+  }
+  .fold-diagonal {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .fold-diagonal::before {
+    content: '';
+    position: absolute;
+    width: 141%;
+    height: 1px;
+    background: rgba(42,37,34,0.25);
+    top: 50%;
+    left: -20%;
+    transform: rotate(-8deg);
+  }
+  .fold-checker {
+    position: absolute;
+    bottom: 10px; left: 10px;
+    width: 16px; height: 20px;
+    background-image:
+      linear-gradient(45deg, #555 25%, transparent 25%),
+      linear-gradient(-45deg, #555 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #555 75%),
+      linear-gradient(-45deg, transparent 75%, #555 75%);
+    background-size: 4px 4px;
+    background-position: 0 0, 0 2px, 2px -2px, -2px 0;
+    background-color: #888;
+    opacity: 0.55;
+  }
+  .fold-close {
+    position: absolute;
+    top: 8px; right: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    color: rgba(42,37,34,0.45);
+    letter-spacing: 0.1em;
+  }
+  .fold-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 58%;
+    background: #101010;
+    padding: 12px 14px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .fold-id {
+    font-size: 0.5rem;
+    color: #4DFFA0;
+    letter-spacing: 0.15em;
+    margin-bottom: 4px;
+  }
+  .fold-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .fold-meta {
+    font-size: 0.5rem;
+    color: #555;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .fold-rule { width: 24px; height: 1px; background: #2a2a2a; margin-bottom: 6px; }
+  .fold-desc {
+    font-size: 0.55rem;
+    color: #888;
+    line-height: 1.6;
+    flex: 1;
+  }
+  .fold-year {
+    font-size: 0.5rem;
+    color: #333;
+    letter-spacing: 0.1em;
+    align-self: flex-end;
+  }
+
+  /* ── CONCEPT B: The Panel (right-drawer) ── */
+  .panel-bg {
+    position: absolute;
+    inset: 0;
+    background: #101010;
+    display: flex;
+  }
+  .panel-left {
+    flex: 1;
+    background: #1a1a1a;
+    position: relative;
+    overflow: hidden;
+    opacity: 0.4;
+    filter: blur(0.5px);
+  }
+  .panel-left-card {
+    position: absolute;
+    inset: 0;
+    background: #C9C4BB;
+  }
+  .panel-left-card::before {
+    content: '';
+    position: absolute;
+    width: 141%;
+    height: 1px;
+    background: rgba(42,37,34,0.25);
+    top: 50%;
+    left: -20%;
+    transform: rotate(-12deg);
+  }
+  .panel-drawer {
+    width: 58%;
+    background: #111;
+    border-left: 1px solid #252525;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .panel-visual {
+    height: 38%;
+    background: #C9C4BB;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .panel-visual-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    color: rgba(42,37,34,0.12);
+    line-height: 1;
+    position: absolute;
+    right: -4px;
+    bottom: -10px;
+  }
+  .panel-visual::before {
+    content: '';
+    position: absolute;
+    width: 141%;
+    height: 1px;
+    background: rgba(42,37,34,0.25);
+    top: 50%;
+    left: -20%;
+    transform: rotate(-10deg);
+  }
+  .panel-checker2 {
+    position: absolute;
+    bottom: 8px; left: 8px;
+    width: 12px; height: 15px;
+    background-image:
+      linear-gradient(45deg, #555 25%, transparent 25%),
+      linear-gradient(-45deg, #555 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #555 75%),
+      linear-gradient(-45deg, transparent 75%, #555 75%);
+    background-size: 4px 4px;
+    background-position: 0 0, 0 2px, 2px -2px, -2px 0;
+    background-color: #888;
+    opacity: 0.55;
+  }
+  .panel-body {
+    flex: 1;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow: hidden;
+  }
+  .panel-close {
+    position: absolute;
+    top: 8px; right: 10px;
+    font-size: 0.5rem;
+    color: #333;
+    letter-spacing: 0.1em;
+  }
+  .panel-id { font-size: 0.45rem; color: #4DFFA0; letter-spacing: 0.15em; }
+  .panel-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .panel-meta { font-size: 0.45rem; color: #444; letter-spacing: 0.08em; }
+  .panel-rule { width: 20px; height: 1px; background: #222; margin: 2px 0; }
+  .panel-desc { font-size: 0.45rem; color: #666; line-height: 1.6; }
+
+  /* ── CONCEPT C: The Spread (two-column editorial) ── */
+  .spread {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #101010;
+  }
+  .spread-left {
+    background: #C9C4BB;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+  }
+  .spread-big-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11rem;
+    font-weight: 300;
+    color: rgba(42,37,34,0.08);
+    line-height: 1;
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    user-select: none;
+  }
+  .spread-left-diag::before {
+    content: '';
+    position: absolute;
+    width: 141%;
+    height: 1px;
+    background: rgba(42,37,34,0.2);
+    top: 50%;
+    left: -20%;
+    transform: rotate(-10deg);
+  }
+  .spread-left-bottom {
+    position: relative;
+    z-index: 1;
+  }
+  .spread-checker3 {
+    width: 14px; height: 18px;
+    background-image:
+      linear-gradient(45deg, #555 25%, transparent 25%),
+      linear-gradient(-45deg, #555 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #555 75%),
+      linear-gradient(-45deg, transparent 75%, #555 75%);
+    background-size: 4px 4px;
+    background-position: 0 0, 0 2px, 2px -2px, -2px 0;
+    background-color: #888;
+    opacity: 0.55;
+    margin-bottom: 6px;
+  }
+  .spread-year-l {
+    font-size: 0.45rem;
+    color: rgba(42,37,34,0.5);
+    letter-spacing: 0.1em;
+  }
+  .spread-right {
+    padding: 12px 12px 12px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-left: 1px solid #1e1e1e;
+    position: relative;
+  }
+  .spread-close {
+    position: absolute;
+    top: 8px; right: 10px;
+    font-size: 0.5rem;
+    color: #2a2a2a;
+    letter-spacing: 0.1em;
+  }
+  .spread-top { display: flex; flex-direction: column; gap: 4px; }
+  .spread-id { font-size: 0.45rem; color: #4DFFA0; letter-spacing: 0.15em; }
+  .spread-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .spread-medium { font-size: 0.45rem; color: #555; letter-spacing: 0.08em; }
+  .spread-mid { display: flex; flex-direction: column; gap: 4px; }
+  .spread-rule { width: 20px; height: 1px; background: #1e1e1e; }
+  .spread-desc { font-size: 0.45rem; color: #666; line-height: 1.6; }
+  .spread-bottom { font-size: 0.45rem; color: #2a2a2a; letter-spacing: 0.08em; }
+
+  /* descriptions */
+  .desc-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin-top: 12px;
+    margin-bottom: 32px;
+  }
+  .desc-block { padding: 10px 12px; background: #111; border: 1px solid #1e1e1e; }
+  .desc-head {
+    font-size: 0.6rem;
+    color: #4DFFA0;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+  }
+  .desc-text { font-size: 0.6rem; color: #555; line-height: 1.7; }
+
+  .note {
+    max-width: 1100px;
+    font-size: 0.6rem;
+    color: #333;
+    letter-spacing: 0.05em;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Detail Page — Three Directions</h1>
+<p class="sub">Click a concept to select it. All use the same project data and design language.</p>
+
+<div class="concepts">
+
+  <!-- CONCEPT A -->
+  <div class="concept" data-choice="a" onclick="toggleSelect(this)">
+    <div class="concept-label">
+      <span class="concept-letter">A</span>
+      <span class="concept-name">The Fold</span>
+    </div>
+    <div class="mockup">
+      <div class="fold-top">
+        <div class="fold-diagonal"></div>
+        <div class="fold-checker"></div>
+        <span class="fold-top-num">02</span>
+        <span class="fold-close">[ esc ]</span>
+      </div>
+      <div class="fold-bottom">
+        <div>
+          <div class="fold-id">02 —</div>
+          <div class="fold-title">Surface Tension</div>
+          <div class="fold-meta">2024 — installation, performance</div>
+          <div class="fold-rule"></div>
+          <div class="fold-desc">Mapping the liminal space between physical presence and mediated representation across three registers.</div>
+        </div>
+        <div class="fold-year">2024</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT B -->
+  <div class="concept" data-choice="b" onclick="toggleSelect(this)">
+    <div class="concept-label">
+      <span class="concept-letter">B</span>
+      <span class="concept-name">The Panel</span>
+    </div>
+    <div class="mockup">
+      <div class="panel-bg">
+        <div class="panel-left">
+          <div class="panel-left-card"></div>
+        </div>
+        <div class="panel-drawer">
+          <span class="panel-close">[ esc ]</span>
+          <div class="panel-visual">
+            <div class="panel-checker2"></div>
+            <span class="panel-visual-num">02</span>
+          </div>
+          <div class="panel-body">
+            <div class="panel-id">02 —</div>
+            <div class="panel-title">Surface Tension</div>
+            <div class="panel-meta">2024 — installation, performance</div>
+            <div class="panel-rule"></div>
+            <div class="panel-desc">Mapping the liminal space between physical presence and mediated representation across three registers.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT C -->
+  <div class="concept" data-choice="c" onclick="toggleSelect(this)">
+    <div class="concept-label">
+      <span class="concept-letter">C</span>
+      <span class="concept-name">The Spread</span>
+    </div>
+    <div class="mockup">
+      <div class="spread">
+        <div class="spread-left spread-left-diag">
+          <span class="spread-big-num">02</span>
+          <div class="spread-left-bottom">
+            <div class="spread-checker3"></div>
+            <div class="spread-year-l">2024</div>
+          </div>
+        </div>
+        <div class="spread-right">
+          <span class="spread-close">[ esc ]</span>
+          <div class="spread-top">
+            <div class="spread-id">02 —</div>
+            <div class="spread-title">Surface Tension</div>
+            <div class="spread-medium">installation, performance</div>
+          </div>
+          <div class="spread-mid">
+            <div class="spread-rule"></div>
+            <div class="spread-desc">Mapping the liminal space between physical presence and mediated representation across three registers.</div>
+          </div>
+          <div class="spread-bottom">eif — 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="desc-row">
+  <div class="desc-block">
+    <div class="desc-head">A — The Fold</div>
+    <div class="desc-text">Full-screen takeover. Top half uses the project's unique color as a large visual field with diagonal + checker motifs. Slides up from below when you click a card. Clean horizontal split — atmospheric above, editorial below.</div>
+  </div>
+  <div class="desc-block">
+    <div class="desc-head">B — The Panel</div>
+    <div class="desc-text">Right-side drawer slides in (60% width). The grid/feed remains dimly visible on the left — gives context. Card's color block at top of panel, content below. Feels like a sidebar inspection view.</div>
+  </div>
+  <div class="desc-block">
+    <div class="desc-head">C — The Spread</div>
+    <div class="desc-text">Full-screen two-column layout, like an editorial print spread. Left: large atmospheric color block with oversized project number. Right: stacked metadata and description. Most "magazine" / catalog feel.</div>
+  </div>
+</div>
+
+<p class="note">All concepts: Esc or click-outside closes. Project color used as the visual area background. Cormorant + Space Mono typography throughout.</p>
+
+<script>
+function toggleSelect(el) {
+  document.querySelectorAll('.concept').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  const choice = el.dataset.choice;
+  const text = el.querySelector('.concept-name').textContent;
+  if (window.__helper) window.__helper.recordChoice(choice, text);
+}
+</script>
+</body>
+</html>
