@@ -1,10 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
-import { PALE_BLUE_DOT_TAGGED } from '../../data/paleBlueDot';
+import { PALE_BLUE_DOT_COLOR_GROUPS, PALE_BLUE_DOT_TAGGED } from '../../data/paleBlueDot';
 import './mouseTagTrail.css';
-
-//const BG_COLORS = ['#9ed8ff', '#00aaff', '#2f7ed8', '#174f9a', '#b7e3ff', '#6aa6e8', '#c8f0ff'];
-const BG_COLORS = ['rgb(186 203 0)', '#00ff66', '#00aaff', '#ff00aa', '#ff8800', '#ccff00', '#aa66ff'];
-
 
 type TrailTag = {
   id: number;
@@ -76,8 +72,8 @@ function MouseTagTrail() {
         wordCursorRef.current = (wordCursorRef.current + 1) % poemLen;
         idRef.current += 1;
         const meta = PALE_BLUE_DOT_TAGGED[wordIndex];
-        const colorIndex = meta.colorGroupIndex % BG_COLORS.length;
-        const bg = BG_COLORS[colorIndex];
+        const colorIndex = meta.colorGroupIndex % PALE_BLUE_DOT_COLOR_GROUPS.length;
+        const bg = PALE_BLUE_DOT_COLOR_GROUPS[colorIndex];
         const ink = colorIndex === 2 || colorIndex === 3 ? '#fff' : '#03111d';
 
         additions.push({

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Nav, { type ViewMode } from './components/nav/Nav';
 import Header from './components/header/Header';
 import About from './components/about/About';
+import PaleBlueDot from './components/paleBlueDot/PaleBlueDot';
 import Feed from './components/feed/Feed';
 import Detail from './components/detail/Detail';
 import MouseTagTrail from './components/mouseTagTrail/MouseTagTrail';
@@ -30,7 +31,7 @@ function App() {
     <div className="app">
       <Nav view={view} onViewChange={handleViewChange} />
 
-      <Header />
+      <Header onOpenPaleBlueDot={() => setView('pale-blue-dot')} />
 
       {mouseTrailActive && <MouseTagTrail />}
 
@@ -40,6 +41,7 @@ function App() {
 
       <div className={`app__overlay${view ? ' app__overlay--open' : ''}`} onClick={handleClose}>
         {view === 'about' && <About />}
+        {view === 'pale-blue-dot' && <PaleBlueDot />}
         {view === 'feed' && <Feed projects={projects} articles={articles} onSelect={setSelectedItem} />}
       </div>
 

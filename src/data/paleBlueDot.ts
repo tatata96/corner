@@ -13,6 +13,18 @@ It has been said that astronomy is a humbling and character-building experience.
 — Carl Sagan, Pale Blue Dot, 1994
 `.trim();
 
+export const PALE_BLUE_DOT_TEXT = RAW;
+
+export const PALE_BLUE_DOT_COLOR_GROUPS = [
+  'rgb(186 203 0)',
+  '#00ff66',
+  '#00aaff',
+  '#ff00aa',
+  '#ff8800',
+  '#ccff00',
+  '#aa66ff',
+] as const;
+
 export type PaleBlueDotWord = {
   readonly word: string;
   /** Index of the punctuation group this word belongs to (same index -> same trail color). */

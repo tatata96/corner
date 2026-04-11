@@ -1,6 +1,6 @@
 import './nav.css';
 
-export type ViewMode = 'about' | 'feed';
+export type ViewMode = 'about' | 'feed' | 'pale-blue-dot';
 
 interface NavProps {
   view: ViewMode | null;
