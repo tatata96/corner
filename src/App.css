@@ -14,8 +14,7 @@
   cursor: default;
 }
 
-/* The overlay has no background — dark card backgrounds float over the
-   landing title, letting the mint text bleed through the gutters. */
+/* Overlay has no fill — cards sit over the landing title. */
 .app__overlay {
   position: fixed;
   inset: 0;

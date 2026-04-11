@@ -11,8 +11,6 @@ function Header() {
       </h1>
 
       <div className="header__bottom">
-        <div className="header__rule" />
-
         <p className="header__subtitle">experimental intermedia foundation</p>
       </div>
     </header>

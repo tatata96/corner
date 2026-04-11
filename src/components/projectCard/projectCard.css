@@ -3,6 +3,13 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.85);
+  filter: drop-shadow(0.35rem 0.35rem 0 rgba(0, 0, 0, 0.85));
+  transition: filter 0.15s ease;
+}
+
+.card:hover {
+  filter: drop-shadow(0.45rem 0.45rem 0 rgba(0, 0, 0, 0.85));
 }
 
 /* ── Grid variant ── */
@@ -80,7 +87,7 @@
 .card__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(255, 255, 255, 0.92);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -91,17 +98,19 @@
 
 .card__title {
   font-family: var(--font-display);
-  font-weight: 300;
-  font-style: italic;
-  font-size: 1.1rem;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1rem;
   color: var(--ink);
-  line-height: 1.2;
+  line-height: 1.15;
   margin-bottom: 2px;
+  letter-spacing: -0.02em;
 }
 
 .card__meta {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink-muted);
 }
