@@ -4,7 +4,7 @@ function Header() {
   return (
     <header className="header">
       <h1 className="header__title">
-        a human<br />
+        human<br />
         on a small dot
       </h1>
       <span className="header__pale-blue-dot" aria-hidden="true" />

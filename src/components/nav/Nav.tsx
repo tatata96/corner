@@ -1,6 +1,6 @@
 import './nav.css';
 
-export type ViewMode = 'grid' | 'feed';
+export type ViewMode = 'about' | 'feed';
 
 interface NavProps {
   view: ViewMode | null;
@@ -14,10 +14,10 @@ function Nav({ view, onViewChange }: NavProps) {
 
       <div className="nav__views">
         <button
-          className={`nav__view-btn${view === 'grid' ? ' nav__view-btn--active' : ''}`}
-          onClick={() => onViewChange('grid')}
+          className={`nav__view-btn${view === 'about' ? ' nav__view-btn--active' : ''}`}
+          onClick={() => onViewChange('about')}
         >
-          grid
+          about
         </button>
 
         <button

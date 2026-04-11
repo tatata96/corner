@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Nav, { type ViewMode } from './components/nav/Nav';
 import Header from './components/header/Header';
-import Grid from './components/grid/Grid';
+import About from './components/about/About';
 import Feed from './components/feed/Feed';
 import Detail from './components/detail/Detail';
 import MouseTagTrail from './components/mouseTagTrail/MouseTagTrail';
@@ -39,7 +39,7 @@ function App() {
       )}
 
       <div className={`app__overlay${view ? ' app__overlay--open' : ''}`} onClick={handleClose}>
-        {view === 'grid' && <Grid onSelect={setSelectedItem} />}
+        {view === 'about' && <About />}
         {view === 'feed' && <Feed projects={projects} articles={articles} onSelect={setSelectedItem} />}
       </div>
 

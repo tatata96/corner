@@ -1,0 +1,104 @@
+.about-view {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+.about-panel {
+  position: relative;
+  width: min(100%, 680px);
+  min-height: min(76vh, 620px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding: var(--space-md);
+  background-color: var(--card-bg);
+  border: 1px solid rgba(0, 0, 0, 0.85);
+  filter: drop-shadow(0.35rem 0.35rem 0 rgba(0, 0, 0, 0.85));
+}
+
+.about-panel__diagonal {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.about-panel__diagonal::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  left: 0;
+  background: var(--card-border);
+  transform: rotate(calc(atan2(var(--h, 1), var(--w, 1))));
+  transform-origin: left center;
+}
+
+.about-panel__label,
+.about-panel__body,
+.about-panel__links {
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+}
+
+.about-panel__label {
+  position: relative;
+  z-index: 1;
+  margin-bottom: auto;
+  font-size: 0.58rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+
+.about-panel__title {
+  position: relative;
+  z-index: 1;
+  margin-bottom: var(--space-md);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+.about-panel__body {
+  position: relative;
+  z-index: 1;
+  max-width: 58ch;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(0, 0, 0, 0.68);
+}
+
+.about-panel__body p + p {
+  margin-top: var(--space-sm);
+}
+
+.about-panel__links {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--ink-muted);
+}
+
+.about-panel__links a {
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.25);
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.about-panel__links a:hover {
+  color: var(--ink);
+}
