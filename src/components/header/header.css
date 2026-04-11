@@ -4,6 +4,7 @@
   top: var(--nav-h);
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
   padding: var(--space-lg) var(--space-md) var(--space-md);
   pointer-events: none;
@@ -15,10 +16,22 @@
   font-family: var(--font-display);
   font-weight: 800;
   font-style: normal;
-  font-size: clamp(2.5rem, 8vw, 7rem);
+  font-size: clamp(1.9rem, 5.4vw, 4.6rem);
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
+  text-align: center;
   color: var(--ink);
+}
+
+.header__pale-blue-dot {
+  position: absolute;
+  right: 23vw;
+  top: 42vh;
+  width: clamp(0.32rem, 0.55vw, 0.5rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #1f5f9f;
+  box-shadow: 0 0 0.45rem rgba(31, 95, 159, 0.65);
 }
 
 .header__bottom {

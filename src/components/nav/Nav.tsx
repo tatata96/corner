@@ -10,7 +10,7 @@ interface NavProps {
 function Nav({ view, onViewChange }: NavProps) {
   return (
     <nav className="nav">
-      <span className="nav__name">eif</span>
+      <span className="nav__name">tamara kozok</span>
 
       <div className="nav__views">
         <button

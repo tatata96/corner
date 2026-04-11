@@ -92,8 +92,19 @@ function MouseTagTrail() {
       });
     }
 
+    function onClick(e: MouseEvent) {
+      if (e.clientY < navHeightPx()) return;
+      wordCursorRef.current = 0;
+      idRef.current = 0;
+      setTags([]);
+    }
+
     window.addEventListener('mousemove', onMove, { passive: true });
-    return () => window.removeEventListener('mousemove', onMove);
+    window.addEventListener('click', onClick, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('click', onClick);
+    };
   }, []);
 
   return (
