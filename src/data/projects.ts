@@ -1,4 +1,5 @@
 export interface Project {
+  type: 'project';
   id: string;
   title: string;
   year: string;
@@ -10,6 +11,7 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    type: 'project',
     id: '01',
     title: 'Signal / Noise',
     year: '2024',
@@ -19,6 +21,7 @@ export const projects: Project[] = [
     accent: '#2A2522',
   },
   {
+    type: 'project',
     id: '02',
     title: 'Surface Tension',
     year: '2024',
@@ -28,6 +31,7 @@ export const projects: Project[] = [
     accent: '#3B3530',
   },
   {
+    type: 'project',
     id: '03',
     title: 'After the Archive',
     year: '2023',
@@ -37,6 +41,7 @@ export const projects: Project[] = [
     accent: '#1E1A17',
   },
   {
+    type: 'project',
     id: '04',
     title: 'Feedback Loop',
     year: '2023',
@@ -46,6 +51,7 @@ export const projects: Project[] = [
     accent: '#312C28',
   },
   {
+    type: 'project',
     id: '05',
     title: 'Threshold Studies',
     year: '2023',
@@ -55,6 +61,7 @@ export const projects: Project[] = [
     accent: '#252220',
   },
   {
+    type: 'project',
     id: '06',
     title: 'Common Ground',
     year: '2022',

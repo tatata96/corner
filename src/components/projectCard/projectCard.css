@@ -39,6 +39,10 @@
   opacity: 1;
 }
 
+.card--article .card__diagonal::before {
+  transform: rotate(-4deg);
+}
+
 /* ── Diagonal line (placeholder) ── */
 
 .card__diagonal {
@@ -82,18 +86,41 @@
   opacity: 0.55;
 }
 
-/* ── Hover info overlay ── */
+/* ── Card text ── */
 
+.card__cover,
 .card__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.92);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   padding: var(--space-sm);
+}
+
+.card__cover {
+  justify-content: flex-end;
+}
+
+.card__overlay {
+  background: rgba(255, 255, 255, 0.92);
+  justify-content: flex-end;
   opacity: 0;
+  overflow-y: auto;
   transition: opacity 0.2s ease;
+}
+
+.card--article .card__overlay {
+  justify-content: flex-start;
+}
+
+.card__label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  letter-spacing: 0;
+  margin-bottom: auto;
+  text-transform: uppercase;
 }
 
 .card__title {
@@ -104,7 +131,7 @@
   color: var(--ink);
   line-height: 1.15;
   margin-bottom: 2px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .card__meta {
@@ -113,4 +140,14 @@
   font-weight: 400;
   letter-spacing: 0;
   color: var(--ink-muted);
+}
+
+.card__article {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.45;
+  margin-top: var(--space-sm);
+  white-space: pre-wrap;
 }

@@ -1,16 +1,22 @@
-import { projects, type Project } from '../../data/projects';
+import type { Article } from '../../data/articles';
+import type { ContentItem } from '../../data/content';
+import type { Project } from '../../data/projects';
 import ProjectCard from '../projectCard/ProjectCard';
 import './feed.css';
 
 interface FeedProps {
-  onSelect: (project: Project) => void;
+  projects: Project[];
+  articles: Article[];
+  onSelect: (item: ContentItem) => void;
 }
 
-function Feed({ onSelect }: FeedProps) {
+function Feed({ projects, articles, onSelect }: FeedProps) {
+  const items: ContentItem[] = [...projects, ...articles];
+
   return (
     <section className="feed-view" onClick={(e) => e.stopPropagation()}>
-      {projects.map((project) => (
-        <ProjectCard key={project.id} project={project} variant="feed" onSelect={onSelect} />
+      {items.map((item) => (
+        <ProjectCard key={item.id} item={item} variant="feed" onSelect={onSelect} />
       ))}
     </section>
   );

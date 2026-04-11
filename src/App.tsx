@@ -5,24 +5,26 @@ import Grid from './components/grid/Grid';
 import Feed from './components/feed/Feed';
 import Detail from './components/detail/Detail';
 import MouseTagTrail from './components/mouseTagTrail/MouseTagTrail';
-import type { Project } from './data/projects';
+import { projects } from './data/projects';
+import { articles } from './data/articles';
+import type { ContentItem } from './data/content';
 import './App.css';
 
 function App() {
   const [view, setView] = useState<ViewMode | null>(null);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
 
   function handleViewChange(next: ViewMode) {
     setView((prev) => (prev === next ? null : next));
-    setSelectedProject(null);
+    setSelectedItem(null);
   }
 
   function handleClose() {
     setView(null);
-    setSelectedProject(null);
+    setSelectedItem(null);
   }
 
-  const mouseTrailActive = view === null && selectedProject === null;
+  const mouseTrailActive = view === null && selectedItem === null;
 
   return (
     <div className="app">
@@ -37,12 +39,12 @@ function App() {
       )}
 
       <div className={`app__overlay${view ? ' app__overlay--open' : ''}`} onClick={handleClose}>
-        {view === 'grid' && <Grid onSelect={setSelectedProject} />}
-        {view === 'feed' && <Feed onSelect={setSelectedProject} />}
+        {view === 'grid' && <Grid onSelect={setSelectedItem} />}
+        {view === 'feed' && <Feed projects={projects} articles={articles} onSelect={setSelectedItem} />}
       </div>
 
-      {selectedProject && (
-        <Detail project={selectedProject} onClose={() => setSelectedProject(null)} />
+      {selectedItem && (
+        <Detail item={selectedItem} onClose={() => setSelectedItem(null)} />
       )}
     </div>
   );
