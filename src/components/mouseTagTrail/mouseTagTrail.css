@@ -22,6 +22,7 @@
   overflow-wrap: normal;
   transform: translate(-50%, -140%);
   animation: mouse-tag-trail-life 2.6s step-end forwards;
+  z-index: 1000;
 }
 
 @keyframes mouse-tag-trail-life {

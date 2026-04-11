@@ -2,8 +2,8 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { PALE_BLUE_DOT_TAGGED } from '../../data/paleBlueDot';
 import './mouseTagTrail.css';
 
-//const BG_COLORS = ['#9ed8ff', '#5fb7ff', '#2f7ed8', '#174f9a', '#b7e3ff', '#6aa6e8', '#c8f0ff'];
-const BG_COLORS = ['#ffff00', '#00ff66', '#00aaff', '#ff00aa', '#ff8800', '#ccff00', '#aa66ff'];
+const BG_COLORS = ['#9ed8ff', '#00aaff', '#2f7ed8', '#174f9a', '#b7e3ff', '#6aa6e8', '#c8f0ff'];
+//const BG_COLORS = ['#ffff00', '#00ff66', '#00aaff', '#ff00aa', '#ff8800', '#ccff00', '#aa66ff'];
 
 
 type TrailTag = {
@@ -123,8 +123,9 @@ function MouseTagTrail() {
             {
               left: tag.x,
               top: tag.y,
-              backgroundColor: tag.bg,
-              color: tag.ink,
+              //backgroundColor: tag.bg,
+              color: tag.bg,
+              //color: tag.ink,
             } as CSSProperties
           }
           onAnimationEnd={(e) => {
