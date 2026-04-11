@@ -1,0 +1,40 @@
+.mouse-tag-trail {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.mouse-tag-trail__tag {
+  position: fixed;
+  left: 0;
+  top: 0;
+  max-width: min(14rem, 48vw);
+  padding: 0.22rem 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.8rem, 1.35vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  color: #000;
+  white-space: normal;
+  word-break: break-word;
+  transform: translate(-50%, -120%);
+  opacity: 1;
+}
+
+.mouse-tag-trail__tag--exit {
+  animation: mouse-tag-trail-exit 0.7s ease-out forwards;
+  will-change: opacity;
+}
+
+@keyframes mouse-tag-trail-exit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

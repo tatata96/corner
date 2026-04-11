@@ -4,6 +4,7 @@ import Header from './components/header/Header';
 import Grid from './components/grid/Grid';
 import Feed from './components/feed/Feed';
 import Detail from './components/detail/Detail';
+import MouseTagTrail from './components/mouseTagTrail/MouseTagTrail';
 import type { Project } from './data/projects';
 import './App.css';
 
@@ -21,11 +22,15 @@ function App() {
     setSelectedProject(null);
   }
 
+  const mouseTrailActive = view === null && selectedProject === null;
+
   return (
     <div className="app">
       <Nav view={view} onViewChange={handleViewChange} />
 
       <Header />
+
+      {mouseTrailActive && <MouseTagTrail />}
 
       {view && (
         <div className="app__backdrop" onClick={handleClose} aria-hidden="true" />
