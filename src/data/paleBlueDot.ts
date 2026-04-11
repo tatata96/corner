@@ -1,5 +1,5 @@
-/** Carl Sagan, Pale Blue Dot (1994) — words in reading order for the cursor trail. */
-export const PALE_BLUE_DOT_WORDS: readonly string[] = `
+/** Carl Sagan, Pale Blue Dot (1994) — source text. */
+const RAW = `
 Look again at that dot. That's here. That's home. That's us. On it everyone you love, everyone you know, everyone you ever heard of, every human being who ever was, lived out their lives. The aggregate of our joy and suffering, thousands of confident religions, ideologies, and economic doctrines, every hunter and forager, every hero and coward, every creator and destroyer of civilization, every king and peasant, every young couple in love, every mother and father, hopeful child, inventor and explorer, every teacher of morals, every corrupt politician, every "superstar," every "supreme leader," every saint and sinner in the history of our species lived there--on a mote of dust suspended in a sunbeam.
 
 The Earth is a very small stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph, they could become the momentary masters of a fraction of a dot. Think of the endless cruelties visited by the inhabitants of one corner of this pixel on the scarcely distinguishable inhabitants of some other corner, how frequent their misunderstandings, how eager they are to kill one another, how fervent their hatreds.
@@ -11,7 +11,29 @@ The Earth is the only world known so far to harbor life. There is nowhere else, 
 It has been said that astronomy is a humbling and character-building experience. There is perhaps no better demonstration of the folly of human conceits than this distant image of our tiny world. To me, it underscores our responsibility to deal more kindly with one another, and to preserve and cherish the pale blue dot, the only home we've ever known.
 
 — Carl Sagan, Pale Blue Dot, 1994
-`
-  .trim()
-  .split(/\s+/)
-  .filter(Boolean);
+`.trim();
+
+export type PaleBlueDotWord = {
+  readonly word: string;
+  /** Index of the sentence this word belongs to (same index → same trail color). */
+  readonly sentenceIndex: number;
+};
+
+function buildTaggedWords(source: string): PaleBlueDotWord[] {
+  const normalized = source.replace(/\s+/g, ' ').trim();
+  const sentences = normalized.split(/(?<=[.!?])\s+/).filter(Boolean);
+  const out: PaleBlueDotWord[] = [];
+  for (let s = 0; s < sentences.length; s++) {
+    const words = sentences[s].split(/\s+/).filter(Boolean);
+    for (const word of words) {
+      out.push({ word, sentenceIndex: s });
+    }
+  }
+  return out;
+}
+
+/** Words in reading order with sentence grouping for styling. */
+export const PALE_BLUE_DOT_TAGGED: readonly PaleBlueDotWord[] = buildTaggedWords(RAW);
+
+/** Plain word list (same order as `PALE_BLUE_DOT_TAGGED`). */
+export const PALE_BLUE_DOT_WORDS: readonly string[] = PALE_BLUE_DOT_TAGGED.map((w) => w.word);

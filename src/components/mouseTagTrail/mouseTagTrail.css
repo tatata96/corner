@@ -10,31 +10,27 @@
   position: fixed;
   left: 0;
   top: 0;
-  max-width: min(14rem, 48vw);
-  padding: 0.22rem 0.5rem;
+  max-width: calc(100vw - 2rem);
+  padding: 0.18rem 0.42rem;
   font-family: var(--font-display);
-  font-size: clamp(0.8rem, 1.35vw, 1rem);
+  font-size: 0.9rem;
   font-weight: 700;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   line-height: 1.2;
   color: #000;
-  white-space: normal;
-  word-break: break-word;
-  transform: translate(-50%, -120%);
-  opacity: 1;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  transform: translate(-50%, -140%);
+  animation: mouse-tag-trail-life 2.6s step-end forwards;
 }
 
-.mouse-tag-trail__tag--exit {
-  animation: mouse-tag-trail-exit 0.7s ease-out forwards;
-  will-change: opacity;
-}
-
-@keyframes mouse-tag-trail-exit {
-  from {
-    opacity: 1;
+@keyframes mouse-tag-trail-life {
+  0%,
+  99% {
+    visibility: visible;
   }
 
-  to {
-    opacity: 0;
+  100% {
+    visibility: hidden;
   }
 }
