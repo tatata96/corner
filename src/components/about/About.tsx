@@ -2,8 +2,8 @@ import './about.css';
 
 function About() {
   return (
-    <section className="about-view" onClick={(e) => e.stopPropagation()}>
-      <article className="about-panel">
+    <section className="about-view">
+      <article className="about-panel" onClick={(e) => e.stopPropagation()}>
         <div className="about-panel__diagonal" aria-hidden="true" />
 
         <span className="about-panel__label">about</span>

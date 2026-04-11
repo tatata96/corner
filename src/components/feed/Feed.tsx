@@ -14,7 +14,7 @@ function Feed({ projects, articles, onSelect }: FeedProps) {
   const items: ContentItem[] = [...projects, ...articles];
 
   return (
-    <section className="feed-view" onClick={(e) => e.stopPropagation()}>
+    <section className="feed-view">
       {items.map((item) => (
         <ProjectCard key={item.id} item={item} variant="feed" onSelect={onSelect} />
       ))}

@@ -1,4 +1,5 @@
 import type { ContentItem } from '../../data/content';
+import type { MouseEvent } from 'react';
 import './projectCard.css';
 
 interface ProjectCardProps<T extends ContentItem> {
@@ -12,10 +13,15 @@ function getMeta(item: ContentItem) {
 }
 
 function ProjectCard<T extends ContentItem>({ item, variant = 'grid', onSelect }: ProjectCardProps<T>) {
+  function handleClick(e: MouseEvent<HTMLElement>) {
+    e.stopPropagation();
+    onSelect(item);
+  }
+
   return (
     <article
       className={`card card--${variant} card--${item.type}`}
-      onClick={() => onSelect(item)}
+      onClick={handleClick}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && onSelect(item)}
