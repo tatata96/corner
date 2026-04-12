@@ -13,8 +13,8 @@
 }
 
 .header__title {
-  align-self: flex-start;
   margin-top: 10rem;
+  margin-bottom: 0;
   font-family: var(--font-display);
   font-style: normal;
   font-size: 2.1rem;
@@ -25,9 +25,7 @@
 }
 
 .header__pale-blue-dot {
-  position: absolute;
-  right: 23vw;
-  top: 42vh;
+  margin: auto 0;
   width: 0.5rem;
   padding: 0;
   aspect-ratio: 1;

@@ -11,6 +11,7 @@ function Header({ onOpenPaleBlueDot }: HeaderProps) {
         human<br />
         on a small dot
       </h1>
+
       <button
         type="button"
         className="header__pale-blue-dot"

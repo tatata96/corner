@@ -10,16 +10,17 @@
 .detail-drawer {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 50%;
   bottom: 0;
   width: 58%;
   background: #ffffff;
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
+  border-inline: 1px solid rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transform: translateX(-50%);
   animation: detail-slide-in 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-  filter: drop-shadow(-0.25rem 0 0 rgba(0, 0, 0, 0.06));
+  filter: drop-shadow(0 0 0.25rem rgba(0, 0, 0, 0.06));
 }
 
 .detail-drawer--no-visual {
@@ -32,8 +33,14 @@
 }
 
 @keyframes detail-slide-in {
-  from { transform: translateX(100%); }
-  to   { transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translate(-50%, 1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
 
 /* ── Visual block ── */
@@ -216,7 +223,7 @@
 @media (max-width: 600px) {
   .detail-drawer {
     width: 100%;
-    border-left: none;
+    border-inline: none;
   }
 
   .detail-visual__num {
