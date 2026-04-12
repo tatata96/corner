@@ -20,7 +20,7 @@ function Header({ onOpenPaleBlueDot }: HeaderProps) {
 
       <div className="header__bottom">
         <button type="button" className="header__subtitle" onClick={onOpenPaleBlueDot}>
-          you are seeing pale blue dot by carl sagan
+          you are seeing "pale blue dot" by carl sagan
         </button>
       </div>
     </header>
