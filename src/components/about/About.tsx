@@ -9,11 +9,14 @@ function About() {
         <span className="about-panel__label">about</span>
         <h2 className="about-panel__title">tamara kozok</h2>
         <div className="about-panel__body">
-          <p>I’m a frontend developer working mostly with React and TypeScript.</p>
-          <p>I’ve worked on Web3 tools, dashboards, and mobile apps — focusing on making complex things easier to use and understand.</p>
-          <p>That includes building developer-facing interfaces, structuring data-heavy dashboards, and working with React Native on mobile features.</p>
-          <p>I usually learn by doing, adapting as I go, and working closely with others to get things into production.</p>
-          <p>More recently, I’ve been interested in how AI-driven features are presented on the frontend — and how to keep them clear and usable.</p>
+          <p>I build for the web, mostly with React and TypeScript.</p>
+          <p>Across Web3 tools, dashboards, and mobile apps,<br />I’ve worked on making complex things feel a little more simple —<br />a little easier to understand.</p>
+          <p>Developer interfaces, data-heavy views,<br />and some mobile work with React Native along the way.</p>
+          <p>I also care about design —<br />mostly how things feel,<br />how they come together,<br />and how little details add up.</p>
+          <p>I tend to learn by doing.<br />Figuring things out as I go,<br />asking questions when needed,<br />and working closely with others to get things into production.</p>
+          <p>Lately, I’ve been thinking about how AI shows up in products —<br />and how to keep it clear, usable, and not overwhelming.</p>
+<br />
+          On a small dot, details still matter.
         </div>
 
         <div className="about-panel__links">

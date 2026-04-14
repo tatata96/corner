@@ -52,11 +52,15 @@ function Feed({ projects, articles, onSelect }: FeedProps) {
         onToggle={handleToggle}
         onClear={handleClear}
       />
-      <div className="feed-view__cards">
-        {visibleItems.map((item) => (
-          <ProjectCard key={item.id} item={item} variant="feed" onSelect={onSelect} />
-        ))}
-      </div>
+      {visibleItems.length === 0 ? (
+        <div className="feed-view__empty">no items match the selected filters</div>
+      ) : (
+        <div className="feed-view__cards">
+          {visibleItems.map((item) => (
+            <ProjectCard key={item.id} item={item} variant="feed" onSelect={onSelect} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

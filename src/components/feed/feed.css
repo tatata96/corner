@@ -12,3 +12,16 @@
   flex-direction: column;
   gap: 6px;
 }
+
+.feed-view__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid gray;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--ink-muted);
+  background-color: white;
+}

@@ -13,11 +13,11 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
   padding: 3px 8px;
-  border: 1px solid var(--ink);
   background: transparent;
+  border-radius: 50px;
   color: var(--ink);
   cursor: pointer;
-  transition: background 0.12s ease, color 0.12s ease;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
   line-height: 1.4;
 }
 
@@ -26,12 +26,11 @@
 }
 
 .filter-bar__pill--active {
-  background: var(--ink);
-  color: #ffffff;
+  color: var(--ink);
 }
 
 .filter-bar__pill--active:hover {
-  background: rgba(0, 0, 0, 0.75);
+  opacity: 0.85;
 }
 
 .filter-bar__clear {
