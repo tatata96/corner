@@ -9,6 +9,7 @@ export interface Article {
   image?: string;
   color: string;
   accent: string;
+  tags: string[];
 }
 
 export const articles: Article[] = [
@@ -20,5 +21,6 @@ export const articles: Article[] = [
     content: notesOnListening,
     color: '#D7DBD2',
     accent: '#20251F',
+    tags: ['article'],
   },
 ];
