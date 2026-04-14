@@ -21,7 +21,7 @@ function FilterBar({ tags, activeTags, onToggle, onClear }: FilterBarProps) {
         </button>
       ))}
       {activeTags.size > 0 && (
-        <button className="filter-bar__clear" onClick={onClear}>
+        <button className="filter-bar__clear" onClick={onClear} aria-label="Clear active tag filters">
           clear
         </button>
       )}
