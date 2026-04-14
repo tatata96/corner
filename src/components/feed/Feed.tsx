@@ -56,8 +56,8 @@ function Feed({ projects, articles, onSelect }: FeedProps) {
         <div className="feed-view__empty">no items match the selected filters</div>
       ) : (
         <div className="feed-view__cards">
-          {visibleItems.map((item) => (
-            <ProjectCard key={item.id} item={item} variant="feed" onSelect={onSelect} />
+          {visibleItems.map((item, i) => (
+            <ProjectCard key={item.id} item={item} colorIndex={i} variant="feed" onSelect={onSelect} />
           ))}
         </div>
       )}

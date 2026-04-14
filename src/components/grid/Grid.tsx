@@ -9,8 +9,8 @@ interface GridProps {
 function Grid({ onSelect }: GridProps) {
   return (
     <section className="grid-view" onClick={(e) => e.stopPropagation()}>
-      {projects.map((project) => (
-        <ProjectCard key={project.id} item={project} variant="grid" onSelect={onSelect} />
+      {projects.map((project, i) => (
+        <ProjectCard key={project.id} item={project} colorIndex={i} variant="grid" onSelect={onSelect} />
       ))}
     </section>
   );
