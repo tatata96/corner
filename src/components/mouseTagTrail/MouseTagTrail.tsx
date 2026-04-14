@@ -33,14 +33,12 @@ function MouseTagTrail() {
     /** Large per-event jumps bypass the time gate so fast sweeps don’t feel “late”. */
     const fastStrokeMinPx = 160;
 
-    function onMove(e: MouseEvent) {
+    function handleMove(cx: number, cy: number) {
       const navH = navHeightPx();
-      if (e.clientY < navH) return;
+      if (cy < navH) return;
 
       const now = performance.now();
       const prev = lastRef.current;
-      const cx = e.clientX;
-      const cy = e.clientY;
       const dist = Math.hypot(cx - prev.x, cy - prev.y);
 
       if (prev.t === 0 && prev.x === 0 && prev.y === 0) {
@@ -94,18 +92,32 @@ function MouseTagTrail() {
       });
     }
 
-    function onClick(e: MouseEvent) {
-      if (e.clientY < navHeightPx()) return;
+    function onMouseMove(e: MouseEvent) { handleMove(e.clientX, e.clientY); }
+    function onTouchMove(e: TouchEvent) {
+      const touch = e.touches[0];
+      if (touch) handleMove(touch.clientX, touch.clientY);
+    }
+
+    function onReset() {
       wordCursorRef.current = 0;
       idRef.current = 0;
       setTags([]);
     }
 
-    window.addEventListener('mousemove', onMove, { passive: true });
+    function onClick(e: MouseEvent) {
+      if (e.clientY < navHeightPx()) return;
+      onReset();
+    }
+
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('click', onClick, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('touchstart', onReset, { passive: true });
     return () => {
-      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('click', onClick);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchstart', onReset);
     };
   }, []);
 

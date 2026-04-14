@@ -5,12 +5,13 @@ export type ViewMode = 'about' | 'feed' | 'pale-blue-dot';
 interface NavProps {
   view: ViewMode | null;
   onViewChange: (view: ViewMode) => void;
+  onHome: () => void;
 }
 
-function Nav({ view, onViewChange }: NavProps) {
+function Nav({ view, onViewChange, onHome }: NavProps) {
   return (
     <nav className="nav">
-      <span className="nav__name">tamara kozok</span>
+      <button className="nav__name" onClick={onHome}>tamara kozok</button>
 
       <div className="nav__views">
         <button

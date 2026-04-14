@@ -12,6 +12,12 @@ function Header({ onOpenPaleBlueDot }: HeaderProps) {
         on a small dot
       </h1>
 
+      <div className="header__mobile-links">
+        <a href="https://github.com/tatata96" target="_blank" rel="noopener noreferrer" className="header__mobile-link">github</a>
+        <a href="https://www.linkedin.com/in/tamara-kozok/" target="_blank" rel="noopener noreferrer" className="header__mobile-link">linkedin</a>
+        <a href="mailto:tamarakozok@gmail.com" className="header__mobile-link">email</a>
+      </div>
+
       <button
         type="button"
         className="header__pale-blue-dot"

@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="app">
-      <Nav view={view} onViewChange={handleViewChange} />
+      <Nav view={view} onViewChange={handleViewChange} onHome={handleClose} />
 
       <Header onOpenPaleBlueDot={() => setView('pale-blue-dot')} />
 

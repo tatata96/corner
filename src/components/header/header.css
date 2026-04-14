@@ -24,6 +24,34 @@
   color: var(--ink);
 }
 
+.header__mobile-links {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .header__mobile-links {
+    display: flex;
+    gap: 1.25rem;
+    margin-top: 24px;
+    pointer-events: auto;
+  }
+}
+
+.header__mobile-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--ink-muted);
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.25);
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.header__mobile-link:hover {
+  color: var(--ink);
+}
+
 .header__pale-blue-dot {
   margin: auto 0;
   width: 0.5rem;
