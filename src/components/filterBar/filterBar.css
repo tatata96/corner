@@ -25,7 +25,10 @@
   border-radius: 50px;
   color: var(--ink);
   cursor: pointer;
-  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+  transition:
+    background 0.12s ease,
+    color 0.12s ease,
+    border-color 0.12s ease;
   line-height: 1.4;
 }
 
@@ -86,16 +89,16 @@
 
 .filter-bar__layout-button:hover {
   background: rgba(0, 0, 0, 0.06);
-  color: var(--ink);
+  color: var(--ink-muted);
 }
 
 .filter-bar__layout-button--active {
-  background: var(--ink);
+  background: var(--ink-muted);
   color: white;
 }
 
 .filter-bar__layout-button--active:hover {
-  background: var(--ink);
+  background: var(--ink-muted);
   color: white;
 }
 
