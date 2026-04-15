@@ -3,6 +3,7 @@ import type { Article } from '../../data/articles';
 import type { ContentItem } from '../../data/content';
 import type { Project } from '../../data/projects';
 import FilterBar from '../filterBar/FilterBar';
+import Grid from '../grid/Grid';
 import ProjectCard from '../projectCard/ProjectCard';
 import './feed.css';
 
@@ -14,6 +15,7 @@ interface FeedProps {
 
 function Feed({ projects, articles, onSelect }: FeedProps) {
   const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
+  const [layout, setLayout] = useState<'list' | 'grid'>('list');
 
   const items: ContentItem[] = [...projects, ...articles];
 
@@ -45,15 +47,19 @@ function Feed({ projects, articles, onSelect }: FeedProps) {
   }
 
   return (
-    <section className="feed-view">
+    <section className={`feed-view feed-view--${layout}`}>
       <FilterBar
         tags={allTags}
         activeTags={activeTags}
+        layout={layout}
         onToggle={handleToggle}
         onClear={handleClear}
+        onLayoutChange={setLayout}
       />
       {visibleItems.length === 0 ? (
         <div className="feed-view__empty">no items match the selected filters</div>
+      ) : layout === 'grid' ? (
+        <Grid items={visibleItems} onSelect={onSelect} />
       ) : (
         <div className="feed-view__cards">
           {visibleItems.map((item, i) => (

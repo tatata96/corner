@@ -7,10 +7,19 @@
   margin: 0 auto;
 }
 
+.feed-view--grid {
+  max-width: 960px;
+}
+
 .feed-view__cards {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+.feed-view .grid-view {
+  width: 100%;
+  padding: 0;
 }
 
 .feed-view__empty {
