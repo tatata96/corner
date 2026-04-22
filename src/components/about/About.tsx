@@ -10,7 +10,7 @@ function About() {
         <h2 className="about-panel__title">tamara kozok</h2>
         <div className="about-panel__body">
           <p>I build for the web, mostly with React and TypeScript.</p>
-          <p>Across Web3 tools, dashboards, and mobile apps,<br />I’ve worked on making complex things feel a little more simple —<br />a little easier to understand.</p>
+          <p>Across Web3 tools, dashboards, and mobile apps,<br />I’ve worked on making complex things feel a little more simple ,a little easier to understand.</p>
           <p>Developer interfaces, data-heavy views,<br />and some mobile work with React Native along the way.</p>
           <p>I also care about design —<br />mostly how things feel,<br />how they come together,<br />and how little details add up.</p>
           <p>I tend to learn by doing.<br />Figuring things out as I go,<br />asking questions when needed,<br />and working closely with others to get things into production.</p>

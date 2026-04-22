@@ -3,27 +3,13 @@ It didn't feel like scrolling. It felt more like flying through items — more s
 
 That made me curious enough to try building something similar.
 
-**The process**
-
-The process was mostly trial and error.
-
-I started by building it with DOM elements and v-canvas, but it quickly became too heavy on the browser. Smooth interaction was the whole point of the experience, and it just wasn't there.
-
-So I switched to canvas. That made things much smoother, especially when zooming and moving through the scene.
-
-But then it started to feel a bit stiff. The interactions worked, but they didn't feel natural. The zooming was too direct — no easing, no transitions.
-
-Adding those small details made a big difference. With some tweaking, the movement started to feel much closer to what I had in mind.
-
 ---
 
 **Real examples and Turning it into a package**
 
-Then I wanted to use it for something I actually needed.
-
 I have around a thousand liked songs on Spotify, and I usually play from that list. But finding something I saved years ago is a hassle. There are tracks I remember by feeling or genre, but not by name — especially some Japanese or Russian songs I can't search for easily.
 
-So I decided to integrate the interface with the Spotify API (video on top is showing that). The idea was simple: fly through my tracks, play them with a single click, and add them to a playlist with a double click.
+So I decided to integrate the interface with the Spotify API (video on top). The idea was simple: fly through my tracks, play them with a single click, and add them to a playlist with a double click.
 
 One limitation I ran into was the data itself. Spotify mostly gives you things like artist name, release date, or when a track was added — which isn't always how you remember music.
 
@@ -47,6 +33,18 @@ At that point, it started to feel reusable. So I turned it into a small package:
 I'd love to see more use cases for this kind of interaction — browsing catalogs, exploring products, even shopping. It opens up a different way of navigating content.
 
 ---
+
+**The process**
+
+The process was mostly trial and error.
+
+I started by building it with DOM elements and v-canvas, but it quickly became too heavy on the browser. Smooth interaction was the whole point of the experience, and it just wasn't there.
+
+So I switched to canvas. That made things much smoother, especially when zooming and moving through the scene.
+
+But then it started to feel a bit stiff. The interactions worked, but they didn't feel natural. The zooming was too direct — no easing, no transitions.
+
+Adding those small details made a big difference. With some tweaking, the movement started to feel much closer to what I had in mind.
 
 **What I learned**
 Working on this made a few things very clear.
