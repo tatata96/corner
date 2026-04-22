@@ -1,5 +1,3 @@
-# Making complex data feel simple
-
 When a screen tries to explain everything at once, users stop reading.
 
 I've seen this in dashboards and trading screens: strong data, weak clarity. Nothing is broken. But the experience still feels heavy. Numbers update, charts animate, controls work, yet users hesitate because they can't tell what matters first.

@@ -20,6 +20,6 @@ export const projects: Project[] = [
     description: 'An investigation into the perceptual boundaries between structured communication and entropic dissolution.',
     color: '#D4CFC8',
     accent: '#2A2522',
-    tags: ['project', 'UX', 'Process'],
+    tags: ['PROJECT', 'UX', 'PROCESS'],
   },
 ];

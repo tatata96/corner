@@ -1,5 +1,3 @@
-# Slow Down Before You Code
-
 ## Working without a clear solution
 
 Early in my career, starting a new feature felt almost paralyzing. Every approach seemed wrong before I'd even tried it. My instinct was to just open a file and start typing — waiting felt unproductive, like I wasn't really doing anything.

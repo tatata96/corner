@@ -1,4 +1,5 @@
 import makingComplexDataSimple from '../articles/making-complex-data.md?raw';
+import exploringInterfacesBeyondTheFlatScreen from '../articles/exploring-interfaces-beyond-the-flat-screen.md?raw';
 import slowDown from '../articles/slow-down.md?raw';
 
 export interface Article {
@@ -8,6 +9,7 @@ export interface Article {
   date: string;
   content: string;
   image?: string;
+  video?: string;
   color: string;
   accent: string;
   tags: string[];
@@ -16,13 +18,25 @@ export interface Article {
 export const articles: Article[] = [
   {
     type: 'article',
-   id: 'a01',
+    id: 'a03',
+    title: 'Exploring interfaces beyond the flat screen',
+    date: '2026-04-22',
+    content: exploringInterfacesBeyondTheFlatScreen,
+    video: '/videos/gallery-universe.mov',
+    color: '#D7DBD2',
+    accent: '#20251F',
+    tags: ['FRONTEND', 'UX', 'AI', 'PROJECT', 'ARTICLE'],
+  },
+  {
+    type: 'article',
+    id: 'a01',
     title: 'Making Complex Data Simple',
     date: '2026-04-14',
     content: makingComplexDataSimple,
+    image: '/videos/metrics.png',
     color: '#D7DBD2',
     accent: '#1f1f25ff',
-    tags: ['article', 'Frontend', 'Process'],
+    tags: ['ARTICLE', 'FRONTEND', 'PROCESS'],
   },
   {
     type: 'article',
@@ -32,6 +46,6 @@ export const articles: Article[] = [
     content: slowDown,
     color: '#D7DBD2',
     accent: '#20251F',
-    tags: ['article', 'Process','ai'],
+    tags: ['ARTICLE', 'PROCESS', 'AI'],
   },
 ];
