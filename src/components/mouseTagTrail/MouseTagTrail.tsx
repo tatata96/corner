@@ -9,7 +9,6 @@ type TrailTag = {
   y: number;
   word: string;
   bg: string;
-  ink: string;
 };
 
 function navHeightPx(): number {
@@ -72,7 +71,6 @@ function MouseTagTrail() {
         const meta = PALE_BLUE_DOT_TAGGED[wordIndex];
         const colorIndex = meta.colorGroupIndex % PALE_BLUE_DOT_COLOR_GROUPS.length;
         const bg = PALE_BLUE_DOT_COLOR_GROUPS[colorIndex];
-        const ink = colorIndex === 2 || colorIndex === 3 ? '#fff' : '#03111d';
 
         additions.push({
           id: idRef.current,
@@ -81,7 +79,6 @@ function MouseTagTrail() {
           y,
           word: meta.word,
           bg,
-          ink,
         });
       }
 
@@ -109,24 +106,29 @@ function MouseTagTrail() {
       onReset();
     }
 
+    function onTouchStart() {
+      onReset();
+    }
+
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('click', onClick, { passive: true });
     window.addEventListener('touchmove', onTouchMove, { passive: true });
-    window.addEventListener('touchstart', onReset, { passive: true });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('click', onClick);
       window.removeEventListener('touchmove', onTouchMove);
-      window.removeEventListener('touchstart', onReset);
+      window.removeEventListener('touchstart', onTouchStart);
     };
   }, []);
 
   return (
-    <div className="mouse-tag-trail" aria-hidden="true">
+    <div className="mouse-tag-trail">
       {tags.map((tag) => (
         <span
           key={tag.id}
           className="mouse-tag-trail__tag"
+          aria-hidden="true"
           style={
             {
               left: tag.x,
