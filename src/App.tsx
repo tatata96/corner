@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Nav, { type ViewMode } from './components/nav/Nav';
 import Header from './components/header/Header';
 import About from './components/about/About';
@@ -26,6 +26,25 @@ function App() {
   }
 
   const mouseTrailActive = view === null && selectedItem === null;
+
+  useEffect(() => {
+    const { documentElement, body } = document;
+    const previousHtmlOverflow = documentElement.style.overflow;
+    const previousBodyOverflow = body.style.overflow;
+
+    if (mouseTrailActive) {
+      documentElement.style.overflow = 'hidden';
+      body.style.overflow = 'hidden';
+    } else {
+      documentElement.style.overflow = previousHtmlOverflow;
+      body.style.overflow = previousBodyOverflow;
+    }
+
+    return () => {
+      documentElement.style.overflow = previousHtmlOverflow;
+      body.style.overflow = previousBodyOverflow;
+    };
+  }, [mouseTrailActive]);
 
   return (
     <div className="app">

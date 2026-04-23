@@ -38,7 +38,6 @@
   opacity: 1;
 }
 
-
 /* ── Card text ── */
 
 .card__cover,
@@ -80,7 +79,7 @@
   font-family: var(--font-display);
   font-weight: 600;
   font-style: normal;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--ink);
   line-height: 1.15;
   margin-bottom: 2px;
