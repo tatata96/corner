@@ -115,7 +115,7 @@
   max-width: 980px;
   overflow-y: auto;
   padding-top: 0.2rem;
-  justify-self: flex-end;
+  justify-self: center;
 }
 
 .detail-desc {

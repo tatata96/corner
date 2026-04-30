@@ -9,8 +9,8 @@
   overflow: hidden;
   cursor: pointer;
   color: #050505;
-  background: var(--card-color);
-  border: 1.5px solid rgb(227 220 220);
+  background: #ffffff;
+  border: 1.5px solid var(--ink);
   border-radius: 10px;
   box-shadow: 8px 8px 0 rgb(227 220 220);
   transition:
@@ -126,7 +126,7 @@
   max-width: 64ch;
   overflow: hidden;
   font-family: var(--font-display);
-  font-size: clamp(0.95rem, 1.2vw, 1.12rem);
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0;
   color: rgba(0, 0, 0, 0.78);
