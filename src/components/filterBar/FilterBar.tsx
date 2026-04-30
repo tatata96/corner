@@ -1,27 +1,29 @@
-import { PALE_BLUE_DOT_COLOR_GROUPS } from '../../data/paleBlueDot';
+import type { CSSProperties } from 'react';
 import './filterBar.css';
 
 interface FilterBarProps {
   tags: string[];
+  tagColorMap: Map<string, string>;
   activeTags: Set<string>;
-  layout: 'list' | 'grid';
   onToggle: (tag: string) => void;
   onClear: () => void;
-  onLayoutChange: (layout: 'list' | 'grid') => void;
 }
 
-function FilterBar({ tags, activeTags, layout, onToggle, onClear, onLayoutChange }: FilterBarProps) {
+function FilterBar({ tags, tagColorMap, activeTags, onToggle, onClear }: FilterBarProps) {
   return (
     <div className="filter-bar" onClick={(e) => e.stopPropagation()}>
       <div className="filter-bar__tags">
-        {tags.map((tag, i) => {
+        {tags.map((tag) => {
           const active = activeTags.has(tag);
-          const color = PALE_BLUE_DOT_COLOR_GROUPS[i % PALE_BLUE_DOT_COLOR_GROUPS.length];
+          const color = tagColorMap.get(tag);
+          const style = color
+            ? ({ '--filter-color': color } as CSSProperties)
+            : undefined;
           return (
             <button
               key={tag}
               className={`filter-bar__pill${active ? ' filter-bar__pill--active' : ''}`}
-              style={active ? { backgroundColor: color, borderColor: color } : undefined}
+              style={style}
               onClick={() => onToggle(tag)}
               aria-pressed={active}
             >
@@ -34,23 +36,6 @@ function FilterBar({ tags, activeTags, layout, onToggle, onClear, onLayoutChange
             clear
           </button>
         )}
-      </div>
-
-      <div className="filter-bar__layout" aria-label="Choose layout">
-        <button
-          className={`filter-bar__layout-button${layout === 'list' ? ' filter-bar__layout-button--active' : ''}`}
-          onClick={() => onLayoutChange('list')}
-          aria-pressed={layout === 'list'}
-        >
-          list
-        </button>
-        <button
-          className={`filter-bar__layout-button${layout === 'grid' ? ' filter-bar__layout-button--active' : ''}`}
-          onClick={() => onLayoutChange('grid')}
-          aria-pressed={layout === 'grid'}
-        >
-          grid
-        </button>
       </div>
     </div>
   );

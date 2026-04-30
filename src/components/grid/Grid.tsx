@@ -11,7 +11,13 @@ function Grid({ items, onSelect }: GridProps) {
   return (
     <section className="grid-view" onClick={(e) => e.stopPropagation()}>
       {items.map((item, i) => (
-        <ProjectCard key={item.id} item={item} colorIndex={i} variant="grid" onSelect={onSelect} />
+        <ProjectCard
+          key={item.id}
+          item={item}
+          colorIndex={i}
+          variant="grid"
+          onSelect={onSelect}
+        />
       ))}
     </section>
   );
