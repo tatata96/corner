@@ -1,4 +1,4 @@
-import { useRef, useState, type PointerEvent, type WheelEvent } from 'react';
+import { useRef, useState, type KeyboardEvent, type PointerEvent, type WheelEvent } from 'react';
 import './dump.css';
 
 type DumpAsset = {
@@ -6,6 +6,7 @@ type DumpAsset = {
   type: 'image' | 'video';
   src: string;
   alt?: string;
+  description: string;
   x: number;
   y: number;
   width: number;
@@ -17,6 +18,7 @@ const assets: DumpAsset[] = [
     id: 'briefnew',
     type: 'video',
     src: '/videos/briefnew.mov',
+    description: 'motion prototype for a brief-building flow',
     x: 720,
     y: 260,
     width: 430,
@@ -24,8 +26,9 @@ const assets: DumpAsset[] = [
   {
     id: 'img1',
     type: 'image',
-    src: '/images/img1.png',
+    src: '/images/img1.jpg',
     alt: 'visual study',
+    description: 'visual study exploring layered interface rhythm',
     x: 420,
     y: 360,
     width: 245,
@@ -35,6 +38,7 @@ const assets: DumpAsset[] = [
     type: 'image',
     src: '/videos/metrics.png',
     alt: 'metrics interface',
+    description: 'metrics interface sketch with compact comparison states',
     x: 1030,
     y: 470,
     width: 320,
@@ -43,6 +47,7 @@ const assets: DumpAsset[] = [
     id: 'gallery-universe',
     type: 'video',
     src: '/videos/gallery-universe.mov',
+    description: 'gallery navigation prototype with spatial browsing',
     x: 560,
     y: 570,
     width: 455,
@@ -51,6 +56,7 @@ const assets: DumpAsset[] = [
     id: 'brief2',
     type: 'video',
     src: '/videos/brief2.mov',
+    description: 'alternate brief interaction pass with denser controls',
     x: 1200,
     y: 230,
     width: 280,
@@ -60,6 +66,7 @@ const assets: DumpAsset[] = [
     type: 'image',
     src: '/images/img2.png',
     alt: 'wide interface capture',
+    description: 'wide interface capture for an exploratory tool surface',
     x: 880,
     y: 780,
     width: 390,
@@ -68,6 +75,7 @@ const assets: DumpAsset[] = [
 
 function Dump() {
   const [offset, setOffset] = useState({ x: -320, y: -170 });
+  const [pinnedAssetId, setPinnedAssetId] = useState<string | null>(null);
   const dragRef = useRef<{ pointerId: number; x: number; y: number } | null>(null);
 
   function handlePointerDown(event: PointerEvent<HTMLElement>) {
@@ -105,10 +113,22 @@ function Dump() {
     }));
   }
 
+  function handleTileKeyDown(event: KeyboardEvent<HTMLElement>, assetId: string) {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return;
+    }
+
+    event.preventDefault();
+    setPinnedAssetId((current) => (current === assetId ? null : assetId));
+  }
+
   return (
     <section
       className="dump-view"
-      onClick={(event) => event.stopPropagation()}
+      onClick={(event) => {
+        event.stopPropagation();
+        setPinnedAssetId(null);
+      }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={endDrag}
@@ -121,9 +141,18 @@ function Dump() {
       >
         {assets.map((asset) => (
           <figure
-            className={`dump-view__tile${asset.className ? ` ${asset.className}` : ''}`}
+            className={`dump-view__tile${pinnedAssetId === asset.id ? ' dump-view__tile--pinned' : ''}${asset.className ? ` ${asset.className}` : ''}`}
             key={asset.id}
             style={{ left: asset.x, top: asset.y, width: asset.width }}
+            role="button"
+            tabIndex={0}
+            aria-label={asset.description}
+            onClick={(event) => {
+              event.stopPropagation();
+              setPinnedAssetId((current) => (current === asset.id ? null : asset.id));
+            }}
+            onPointerDown={(event) => event.stopPropagation()}
+            onKeyDown={(event) => handleTileKeyDown(event, asset.id)}
           >
             {asset.type === 'video' ? (
               <video
@@ -137,6 +166,7 @@ function Dump() {
             ) : (
               <img src={asset.src} alt={asset.alt ?? ''} />
             )}
+            <figcaption className="dump-view__tooltip">{asset.description}</figcaption>
           </figure>
         ))}
       </div>

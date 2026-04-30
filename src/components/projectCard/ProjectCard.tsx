@@ -9,7 +9,7 @@ interface ProjectCardProps<T extends ContentItem> {
   onSelect: (item: T) => void;
 }
 
-const fallbackImages = ['/images/img1.png', '/images/img2.png', '/videos/metrics.png'];
+const fallbackImages = ['/images/img1.jpg', '/images/img2.png', '/videos/metrics.png'];
 const cardColors = [
   '#AEB8EA',
   '#8FB8D8',
