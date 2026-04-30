@@ -80,7 +80,7 @@ function ProjectCard<T extends ContentItem>({
 
   return (
     <article
-      className={`card card--${variant} card--${item.type} card--shape-${colorIndex % 4}`}
+      className={`card card--${variant} card--${item.type} card--shape-2`}
       style={style}
       onClick={handleClick}
       role="button"

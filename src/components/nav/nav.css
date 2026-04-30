@@ -76,11 +76,10 @@
   font-weight: 400;
   letter-spacing: 0;
   transition: color 0.15s ease;
-  color: #508df4;
 }
 
 .nav__link:hover {
-  color: var(--ink);
+  color: #508df4;
 }
 
 @media (max-width: 480px) {
