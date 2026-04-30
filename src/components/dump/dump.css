@@ -53,7 +53,7 @@
 }
 
 .dump-view__tile--pinned {
-  --tile-scale: 1.38;
+  --tile-scale: 1.5;
   z-index: 3;
   cursor: zoom-out;
   box-shadow:
@@ -90,10 +90,30 @@
 }
 
 .dump-view__tile:hover .dump-view__tooltip,
-.dump-view__tile:focus-visible .dump-view__tooltip,
-.dump-view__tile--pinned .dump-view__tooltip {
+.dump-view__tile:focus-visible .dump-view__tooltip {
   opacity: 1;
   transform: translateY(0);
+}
+
+.dump-view__tile--pinned .dump-view__tooltip,
+.dump-view__tile--pinned:hover .dump-view__tooltip,
+.dump-view__tile--pinned:focus-visible .dump-view__tooltip {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.dump-view__floating-tooltip {
+  position: fixed;
+  z-index: 10;
+  width: min(280px, calc(100vw - 20px));
+  padding: 8px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #111;
+  font-size: 12px;
+  line-height: 1.25;
+  pointer-events: none;
 }
 
 @media (max-width: 720px) {

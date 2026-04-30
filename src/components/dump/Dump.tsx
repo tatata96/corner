@@ -1,4 +1,11 @@
-import { useRef, useState, type KeyboardEvent, type PointerEvent, type WheelEvent } from 'react';
+import {
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type MouseEvent,
+  type PointerEvent,
+  type WheelEvent,
+} from 'react';
 import './dump.css';
 
 type DumpAsset = {
@@ -75,8 +82,16 @@ const assets: DumpAsset[] = [
 
 function Dump() {
   const [offset, setOffset] = useState({ x: -320, y: -170 });
-  const [pinnedAssetId, setPinnedAssetId] = useState<string | null>(null);
+  const [pinnedTooltip, setPinnedTooltip] = useState<{
+    assetId: string;
+    description: string;
+    x: number;
+    y: number;
+    cursorOffsetX?: number;
+    cursorOffsetY?: number;
+  } | null>(null);
   const dragRef = useRef<{ pointerId: number; x: number; y: number } | null>(null);
+  const tooltipRefs = useRef<Record<string, HTMLElement | null>>({});
 
   function handlePointerDown(event: PointerEvent<HTMLElement>) {
     dragRef.current = {
@@ -89,6 +104,20 @@ function Dump() {
 
   function handlePointerMove(event: PointerEvent<HTMLElement>) {
     const drag = dragRef.current;
+
+    if (pinnedTooltip) {
+      setPinnedTooltip((current) => {
+        if (!current || current.cursorOffsetX === undefined || current.cursorOffsetY === undefined) {
+          return current;
+        }
+
+        return {
+          ...current,
+          x: event.clientX + current.cursorOffsetX,
+          y: event.clientY + current.cursorOffsetY,
+        };
+      });
+    }
 
     if (!drag || drag.pointerId !== event.pointerId) {
       return;
@@ -119,7 +148,42 @@ function Dump() {
     }
 
     event.preventDefault();
-    setPinnedAssetId((current) => (current === assetId ? null : assetId));
+    setPinnedTooltip((current) => {
+      if (current?.assetId === assetId) {
+        return null;
+      }
+
+      const tooltipRect = tooltipRefs.current[assetId]?.getBoundingClientRect();
+
+      return {
+        assetId,
+        description: assets.find((asset) => asset.id === assetId)?.description ?? '',
+        x: tooltipRect?.left ?? 0,
+        y: tooltipRect?.top ?? 0,
+      };
+    });
+  }
+
+  function pinTooltip(asset: DumpAsset, event: MouseEvent<HTMLElement>) {
+    setPinnedTooltip((current) => {
+      if (current?.assetId === asset.id) {
+        return null;
+      }
+
+      const tooltip = tooltipRefs.current[asset.id];
+      const tooltipRect = tooltip?.getBoundingClientRect();
+      const x = tooltipRect?.left ?? event.clientX + 12;
+      const y = tooltipRect?.top ?? event.clientY + 12;
+
+      return {
+        assetId: asset.id,
+        description: asset.description,
+        x,
+        y,
+        cursorOffsetX: x - event.clientX,
+        cursorOffsetY: y - event.clientY,
+      };
+    });
   }
 
   return (
@@ -127,7 +191,7 @@ function Dump() {
       className="dump-view"
       onClick={(event) => {
         event.stopPropagation();
-        setPinnedAssetId(null);
+        setPinnedTooltip(null);
       }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -139,37 +203,61 @@ function Dump() {
         className="dump-view__surface"
         style={{ transform: `translate3d(${offset.x}px, ${offset.y}px, 0)` }}
       >
-        {assets.map((asset) => (
-          <figure
-            className={`dump-view__tile${pinnedAssetId === asset.id ? ' dump-view__tile--pinned' : ''}${asset.className ? ` ${asset.className}` : ''}`}
-            key={asset.id}
-            style={{ left: asset.x, top: asset.y, width: asset.width }}
-            role="button"
-            tabIndex={0}
-            aria-label={asset.description}
-            onClick={(event) => {
-              event.stopPropagation();
-              setPinnedAssetId((current) => (current === asset.id ? null : asset.id));
-            }}
-            onPointerDown={(event) => event.stopPropagation()}
-            onKeyDown={(event) => handleTileKeyDown(event, asset.id)}
-          >
-            {asset.type === 'video' ? (
-              <video
-                src={asset.src}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-              />
-            ) : (
-              <img src={asset.src} alt={asset.alt ?? ''} />
-            )}
-            <figcaption className="dump-view__tooltip">{asset.description}</figcaption>
-          </figure>
-        ))}
+        {assets.map((asset) => {
+          const isPinned = pinnedTooltip?.assetId === asset.id;
+
+          return (
+            <figure
+              className={`dump-view__tile${isPinned ? ' dump-view__tile--pinned' : ''}${asset.className ? ` ${asset.className}` : ''}`}
+              key={asset.id}
+              style={{ left: asset.x, top: asset.y, width: asset.width }}
+              role="button"
+              tabIndex={0}
+              aria-label={asset.description}
+              onClick={(event) => {
+                event.stopPropagation();
+                pinTooltip(asset, event);
+              }}
+              onPointerEnter={() => {
+                setPinnedTooltip((current) => (
+                  current && current.assetId !== asset.id ? null : current
+                ));
+              }}
+              onPointerDown={(event) => event.stopPropagation()}
+              onKeyDown={(event) => handleTileKeyDown(event, asset.id)}
+            >
+              {asset.type === 'video' ? (
+                <video
+                  src={asset.src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                />
+              ) : (
+                <img src={asset.src} alt={asset.alt ?? ''} />
+              )}
+              <figcaption
+                className="dump-view__tooltip"
+                ref={(node) => {
+                  tooltipRefs.current[asset.id] = node;
+                }}
+              >
+                {asset.description}
+              </figcaption>
+            </figure>
+          );
+        })}
       </div>
+      {pinnedTooltip && (
+        <div
+          className="dump-view__floating-tooltip"
+          style={{ left: pinnedTooltip.x, top: pinnedTooltip.y }}
+        >
+          {pinnedTooltip.description}
+        </div>
+      )}
     </section>
   );
 }
