@@ -74,6 +74,7 @@
   font-weight: 400;
   line-height: 1.45;
   color: rgba(0, 0, 0, 0.68);
+  font-family: var(--font-display);
 }
 
 .about-panel__body p + p {

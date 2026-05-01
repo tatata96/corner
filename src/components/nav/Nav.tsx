@@ -1,6 +1,6 @@
 import './nav.css';
 
-export type ViewMode = 'about' | 'feed' | 'pale-blue-dot';
+export type ViewMode = 'about' | 'feed' | 'pale-blue-dot' | 'dump';
 
 interface NavProps {
   view: ViewMode | null;
@@ -26,6 +26,13 @@ function Nav({ view, onViewChange, onHome }: NavProps) {
           onClick={() => onViewChange('feed')}
         >
           feed
+        </button>
+
+        <button
+          className={`nav__view-btn${view === 'dump' ? ' nav__view-btn--active' : ''}`}
+          onClick={() => onViewChange('dump')}
+        >
+          dump
         </button>
       </div>
 

@@ -5,6 +5,7 @@ import About from './components/about/About';
 import PaleBlueDot from './components/paleBlueDot/PaleBlueDot';
 import Feed from './components/feed/Feed';
 import Detail from './components/detail/Detail';
+import Dump from './components/dump/Dump';
 import MouseTagTrail from './components/mouseTagTrail/MouseTagTrail';
 import { projects } from './data/projects';
 import { articles } from './data/articles';
@@ -62,6 +63,7 @@ function App() {
         {view === 'about' && <About />}
         {view === 'pale-blue-dot' && <PaleBlueDot />}
         {view === 'feed' && <Feed projects={projects} articles={articles} onSelect={setSelectedItem} />}
+        {view === 'dump' && <Dump />}
       </div>
 
       {selectedItem && (
