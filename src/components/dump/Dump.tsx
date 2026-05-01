@@ -60,6 +60,15 @@ const assets: DumpAsset[] = [
     width: 455,
   },
   {
+    id: 'train',
+    type: 'video',
+    src: '/videos/train.mov',
+    description: 'train window study in motion',
+    x: 250,
+    y: 710,
+    width: 510,
+  },
+  {
     id: 'brief2',
     type: 'video',
     src: '/videos/brief2.mov',
@@ -67,6 +76,15 @@ const assets: DumpAsset[] = [
     x: 1200,
     y: 230,
     width: 280,
+  },
+  {
+    id: 'work',
+    type: 'video',
+    src: '/videos/work.mov',
+    description: 'work surface capture with interface notes',
+    x: 1390,
+    y: 560,
+    width: 340,
   },
   {
     id: 'img2',
@@ -77,6 +95,15 @@ const assets: DumpAsset[] = [
     x: 880,
     y: 780,
     width: 390,
+  },
+  {
+    id: 'istanbul',
+    type: 'video',
+    src: '/videos/istanbul.mov',
+    description: 'istanbul street texture and movement study',
+    x: 1260,
+    y: 860,
+    width: 360,
   },
 ];
 
