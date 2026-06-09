@@ -145,9 +145,9 @@ function Dump() {
         limitToBounds={false}
         centerZoomedOut={false}
         smooth
-        wheel={{ step: 0.08, wheelDisabled: true }}
+        wheel={{ step: 0.03, wheelDisabled: true }}
         trackPadPanning={{ disabled: false }}
-        pinch={{ step: 4 }}
+        pinch={{ step: 1.8 }}
         doubleClick={{ disabled: true }}
         panning={{ velocityDisabled: false }}
       >
