@@ -35,7 +35,7 @@
 .dump-view__controls,
 .dump-view__filters {
   position: fixed;
-  z-index: 8;
+  z-index: 7;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -100,6 +100,16 @@
 
 .dump-view__filter-clear {
   color: rgba(0, 0, 0, 0.62);
+}
+
+.dump-view__modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 8;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.9) 0 260px, rgba(255, 255, 255, 0.58) 420px, rgba(255, 255, 255, 0.12) 100%),
+    repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.055) 0 1px, transparent 1px 12px);
+  backdrop-filter: blur(4px) saturate(0.82);
 }
 
 .dump-view__tile {
@@ -181,9 +191,9 @@
 .dump-view__detail {
   position: fixed;
   z-index: 9;
-  left: 18px;
+  left: 50%;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
   width: min(520px, calc(100vw - 36px));
   max-height: calc(100vh - var(--nav-h) - 36px);
   overflow: auto;
@@ -280,11 +290,18 @@
   }
 
   .dump-view__detail {
-    left: 12px;
-    top: auto;
-    bottom: 56px;
-    transform: none;
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    transform: translate(-50%, -50%);
     width: calc(100vw - 24px);
-    max-height: 46vh;
+    max-height: calc(100vh - var(--nav-h) - 96px);
   }
+
+  .dump-view__modal-overlay {
+    background:
+      radial-gradient(circle at center, rgba(255, 255, 255, 0.92) 0 190px, rgba(255, 255, 255, 0.62) 340px, rgba(255, 255, 255, 0.2)),
+      repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0 1px, transparent 1px 10px);
+  }
+
 }

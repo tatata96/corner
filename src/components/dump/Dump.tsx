@@ -225,6 +225,10 @@ function Dump() {
       </TransformWrapper>
 
       {selectedAsset && (
+        <div className="dump-view__modal-overlay" aria-hidden="true" />
+      )}
+
+      {selectedAsset && (
         <aside
           className="dump-view__detail"
           aria-label={`${selectedAsset.title} details`}
