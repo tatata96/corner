@@ -2,6 +2,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type ReactNode,
   type KeyboardEvent,
   type MouseEvent,
   type PointerEvent as ReactPointerEvent,
@@ -42,6 +43,55 @@ function getWorldSize(items: PositionedDumpAsset[]) {
   const height = Math.max(...items.map((item) => item.layoutY + item.width * 0.75), 1250) + 260;
 
   return { width, height };
+}
+
+function renderDumpMarkup(content: string) {
+  function renderInline(line: string): ReactNode[] {
+    const parts: ReactNode[] = [];
+    const inlinePattern = /(\*\*([^*]+)\*\*)|(\[([^\]]+)\]\(([^)]+)\))/g;
+    let lastIndex = 0;
+    let match: RegExpExecArray | null;
+
+    while ((match = inlinePattern.exec(line)) !== null) {
+      if (match.index > lastIndex) {
+        parts.push(line.slice(lastIndex, match.index));
+      }
+
+      if (match[2]) {
+        parts.push(<strong key={`${match.index}-strong`}>{match[2]}</strong>);
+      }
+
+      if (match[4] && match[5]) {
+        parts.push(
+          <a key={`${match.index}-link`} href={match[5]} target="_blank" rel="noreferrer">
+            {match[4]}
+          </a>
+        );
+      }
+
+      lastIndex = inlinePattern.lastIndex;
+    }
+
+    if (lastIndex < line.length) {
+      parts.push(line.slice(lastIndex));
+    }
+
+    return parts;
+  }
+
+  return content.split('\n').map((line, index) => {
+    const key = `${index}-${line}`;
+
+    if (line.trim() === '') {
+      return null;
+    }
+
+    if (line.startsWith('- ')) {
+      return <p className="dump-markup__li" key={key}>{renderInline(line.slice(2))}</p>;
+    }
+
+    return <p className="dump-markup__p" key={key}>{renderInline(line)}</p>;
+  });
 }
 
 function DumpControls() {
@@ -216,7 +266,9 @@ function Dump() {
                 )}
                 <figcaption className="dump-view__tooltip">
                   <span>{asset.title}</span>
-                  {asset.description}
+                  <div className="dump-markup dump-markup--tooltip">
+                    {renderDumpMarkup(asset.description)}
+                  </div>
                 </figcaption>
               </figure>
             ))}
@@ -258,7 +310,9 @@ function Dump() {
           </div>
           <span className="dump-view__detail-id">{selectedAsset.id}</span>
           <h2>{selectedAsset.title}</h2>
-          <p>{selectedAsset.description}</p>
+          <div className="dump-markup dump-markup--detail">
+            {renderDumpMarkup(selectedAsset.description)}
+          </div>
           <div className="dump-view__detail-tags">
             {selectedAsset.tags.map((tag) => (
               <span key={tag}>{tag}</span>
