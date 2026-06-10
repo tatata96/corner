@@ -255,6 +255,7 @@
   clear: both;
   overflow: hidden;
   margin-bottom: 14px;
+  max-height: 56vh;
   border-radius: 6px;
   background: #eee;
 }
@@ -263,8 +264,7 @@
 .dump-view__detail-media video {
   display: block;
   width: 100%;
-  max-height: 56vh;
-  height: auto;
+  height: 100%;
   object-fit: contain;
 }
 

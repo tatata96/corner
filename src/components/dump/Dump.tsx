@@ -45,6 +45,14 @@ function getWorldSize(items: PositionedDumpAsset[]) {
   return { width, height };
 }
 
+function getAssetAspectRatio(asset: DumpAsset) {
+  if (asset.mediaWidth && asset.mediaHeight) {
+    return `${asset.mediaWidth} / ${asset.mediaHeight}`;
+  }
+
+  return '16 / 9';
+}
+
 function renderDumpMarkup(content: string) {
   function renderInline(line: string): ReactNode[] {
     const parts: ReactNode[] = [];
@@ -294,7 +302,10 @@ function Dump() {
           >
             close
           </button>
-          <div className="dump-view__detail-media">
+          <div
+            className="dump-view__detail-media"
+            style={{ aspectRatio: getAssetAspectRatio(selectedAsset) }}
+          >
             {selectedAsset.type === 'video' ? (
               <video
                 src={selectedAsset.src}

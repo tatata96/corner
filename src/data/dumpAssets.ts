@@ -4,6 +4,8 @@ export type DumpAsset = {
   type: "image" | "video";
   src: string;
   alt?: string;
+  mediaWidth?: number;
+  mediaHeight?: number;
   description: string;
   tags: string[];
   x: number;
@@ -31,6 +33,8 @@ export const dumpAssets: DumpAsset[] = [
     type: "image",
     src: "/images/img1.jpg",
     alt: "visual study",
+    mediaWidth: 1500,
+    mediaHeight: 711,
     description: "visual study exploring layered interface rhythm",
     tags: ["visual", "interface"],
     x: 420,
@@ -43,6 +47,8 @@ export const dumpAssets: DumpAsset[] = [
     type: "image",
     src: "/videos/metrics.png",
     alt: "metrics interface",
+    mediaWidth: 1454,
+    mediaHeight: 1054,
     description: "metrics interface sketch with compact comparison states",
     tags: ["interface", "data"],
     x: 1030,
@@ -99,6 +105,8 @@ export const dumpAssets: DumpAsset[] = [
     type: "image",
     src: "/images/img2.png",
     alt: "wide interface capture",
+    mediaWidth: 2750,
+    mediaHeight: 1606,
     description: "wide interface capture for an exploratory tool surface",
     tags: ["visual", "tool"],
     x: 880,
