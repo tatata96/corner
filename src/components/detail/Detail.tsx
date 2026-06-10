@@ -83,17 +83,17 @@ function Detail({ item, onClose }: DetailProps) {
   }, [onClose]);
 
   return (
-    <div className="detail-backdrop" onClick={onClose}>
-      <aside
-        className={`detail-drawer${hasVisual ? '' : ' detail-drawer--no-visual'}`}
-        onClick={(e) => e.stopPropagation()}
-      >
+    <section className="detail-page" aria-label={`${item.title} detail`}>
+      <button className="detail-close" onClick={onClose}>[ esc ]</button>
 
-        {!hasVisual && (
-          <button className="detail-close detail-close--floating" onClick={onClose}>[ esc ]</button>
-        )}
+      <div className={`detail-layout${hasVisual ? '' : ' detail-layout--no-visual'}`}>
+        <header className="detail-heading">
+          <span className="detail-id">{item.id} — {item.type}</span>
+          <h2 className="detail-title">{item.title}</h2>
+          <p className="detail-meta">
+            {item.type === 'article' ? item.date : `${item.year} — ${item.medium}`}
+          </p>
 
-        <div className="detail-scroll">
           {hasVisual && (
             <div
               className="detail-visual"
@@ -114,27 +114,19 @@ function Detail({ item, onClose }: DetailProps) {
               ) : (
                 null
               )}
-              <button className="detail-close" onClick={onClose}>[ esc ]</button>
             </div>
           )}
+        </header>
 
-          <div className="detail-body">
-            <span className="detail-id">{item.id} — {item.type}</span>
-            <h2 className="detail-title">{item.title}</h2>
-            <p className="detail-meta">
-              {item.type === 'article' ? item.date : `${item.year} — ${item.medium}`}
-            </p>
-            <div className="detail-rule" />
-            {item.type === 'article' ? (
-              <div className="detail-markdown">{renderMarkdown(item.content)}</div>
-            ) : (
-              <p className="detail-desc">{item.description}</p>
-            )}
-          </div>
-        </div>
-
-      </aside>
-    </div>
+        <main className="detail-body">
+          {item.type === 'article' ? (
+            <div className="detail-markdown">{renderMarkdown(item.content)}</div>
+          ) : (
+            <p className="detail-desc">{item.description}</p>
+          )}
+        </main>
+      </div>
+    </section>
   );
 }
 

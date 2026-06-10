@@ -3,8 +3,8 @@ import type { Article } from '../../data/articles';
 import type { ContentItem } from '../../data/content';
 import type { Project } from '../../data/projects';
 import FilterBar from '../filterBar/FilterBar';
-import Grid from '../grid/Grid';
 import ProjectCard from '../projectCard/ProjectCard';
+import { createTagColorMap } from '../../utils/tagColors';
 import './feed.css';
 
 interface FeedProps {
@@ -15,13 +15,13 @@ interface FeedProps {
 
 function Feed({ projects, articles, onSelect }: FeedProps) {
   const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
-  const [layout, setLayout] = useState<'list' | 'grid'>('list');
 
   const items: ContentItem[] = [...projects, ...articles];
 
   const allTags = Array.from(
     new Set(items.flatMap((item) => item.tags))
   ).sort();
+  const tagColorMap = createTagColorMap(allTags);
 
   const visibleItems =
     activeTags.size === 0
@@ -47,23 +47,26 @@ function Feed({ projects, articles, onSelect }: FeedProps) {
   }
 
   return (
-    <section className={`feed-view feed-view--${layout}`}>
+    <section className="feed-view">
       <FilterBar
         tags={allTags}
+        tagColorMap={tagColorMap}
         activeTags={activeTags}
-        layout={layout}
         onToggle={handleToggle}
         onClear={handleClear}
-        onLayoutChange={setLayout}
       />
       {visibleItems.length === 0 ? (
         <div className="feed-view__empty">no items match the selected filters</div>
-      ) : layout === 'grid' ? (
-        <Grid items={visibleItems} onSelect={onSelect} />
       ) : (
         <div className="feed-view__cards">
           {visibleItems.map((item, i) => (
-            <ProjectCard key={item.id} item={item} colorIndex={i} variant="feed" onSelect={onSelect} />
+            <ProjectCard
+              key={item.id}
+              item={item}
+              colorIndex={i}
+              variant="feed"
+              onSelect={onSelect}
+            />
           ))}
         </div>
       )}
