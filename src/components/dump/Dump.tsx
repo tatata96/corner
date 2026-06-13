@@ -333,6 +333,19 @@ function Dump() {
           </div>
         </aside>
       )}
+
+      <div className="dump-view__coming-soon" onClick={(event) => event.stopPropagation()}>
+        <p className="dump-view__coming-soon-label">playground</p>
+        <div className="dump-view__marquee" aria-label="under construction">
+          <div className="dump-view__marquee-track" aria-hidden="true">
+            <span>under construction</span>
+            <span>under construction</span>
+            <span>under construction</span>
+            <span>under construction</span>
+          </div>
+        </div>
+        <p>experiments, sketches, and side projects will be here soon.</p>
+      </div>
     </section>
   );
 }
