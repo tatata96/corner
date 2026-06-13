@@ -1,11 +1,13 @@
 export type DumpAsset = {
   id: string;
   title: string;
-  type: "image" | "video";
+  type: "image" | "video" | "pdf";
   src: string;
+  coverSrc?: string;
   alt?: string;
   mediaWidth?: number;
   mediaHeight?: number;
+  pageCount?: number;
   collectionId?: string;
   description: string;
   tags: string[];
@@ -16,6 +18,20 @@ export type DumpAsset = {
 };
 
 export const dumpAssets: DumpAsset[] = [
+  {
+    id: "titresim",
+    title: "Titresim",
+    type: "pdf",
+    src: "/pdf/titresim.pdf",
+    coverSrc: "/images/titresim.png",
+    alt: "Titresim cover",
+    pageCount: 19,
+    description: "PDF publication for Titresim.",
+    tags: ["publication", "pdf", "project"],
+    x: 260,
+    y: 230,
+    width: 260,
+  },
   {
     id: "briefnew",
     title: "Brief Builder Motion",

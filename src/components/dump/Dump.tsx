@@ -11,6 +11,7 @@ import {
 import { TransformComponent, TransformWrapper, useControls } from 'react-zoom-pan-pinch';
 import { dumpAssets, type DumpAsset } from '../../data/dumpAssets';
 import MediaCarousel from '../mediaCarousel/MediaCarousel';
+import PdfFlipbook from '../pdfFlipbook/PdfFlipbook';
 import './dump.css';
 
 type PositionedDumpAsset = DumpAsset & {
@@ -147,6 +148,9 @@ function Dump() {
   }, [selectedAsset]);
 
   const detailAsset = activeDetailAsset ?? selectedAsset;
+  const mediaDetailAssets = useMemo(() => (
+    detailAssets.filter((asset): asset is DumpAsset & { type: 'image' | 'video' } => asset.type !== 'pdf')
+  ), [detailAssets]);
 
   useEffect(() => {
     setActiveDetailAsset(selectedAsset);
@@ -273,7 +277,17 @@ function Dump() {
                 onPointerDown={(event) => handleTilePointerDown(asset.id, event)}
                 onKeyDown={(event) => handleTileKeyDown(event, asset.id)}
               >
-                {asset.type === 'video' ? (
+                {asset.type === 'pdf' && asset.coverSrc ? (
+                  <img src={asset.coverSrc} alt={asset.alt ?? ''} />
+                ) : asset.type === 'pdf' ? (
+                  <div className="dump-view__pdf-cover" aria-hidden="true">
+                    <span className="dump-view__pdf-label">PDF</span>
+                    <span className="dump-view__pdf-title">{asset.title}</span>
+                    {asset.pageCount && (
+                      <span className="dump-view__pdf-pages">{asset.pageCount} pages</span>
+                    )}
+                  </div>
+                ) : asset.type === 'video' ? (
                   <video
                     src={asset.src}
                     autoPlay
@@ -303,7 +317,7 @@ function Dump() {
 
       {selectedAsset && detailAsset && (
         <aside
-          className="dump-view__detail"
+          className={`dump-view__detail${detailAsset.type === 'pdf' ? ' dump-view__detail--pdf' : ''}`}
           aria-label={`${detailAsset.title} details`}
           onClick={(event) => event.stopPropagation()}
         >
@@ -315,12 +329,20 @@ function Dump() {
           >
             close
           </button>
-          <MediaCarousel
-            key={selectedAsset.id}
-            items={detailAssets}
-            initialItemId={selectedAsset.id}
-            onActiveItemChange={setActiveDetailAsset}
-          />
+          {detailAsset.type === 'pdf' ? (
+            <PdfFlipbook
+              title={detailAsset.title}
+              src={detailAsset.src}
+              pageCount={detailAsset.pageCount}
+            />
+          ) : (
+            <MediaCarousel
+              key={selectedAsset.id}
+              items={mediaDetailAssets}
+              initialItemId={selectedAsset.id}
+              onActiveItemChange={setActiveDetailAsset}
+            />
+          )}
           <span className="dump-view__detail-id">{detailAsset.id}</span>
           <h2>{detailAsset.title}</h2>
           <div className="dump-markup dump-markup--detail">
@@ -331,21 +353,15 @@ function Dump() {
               <span key={tag}>{tag}</span>
             ))}
           </div>
+          {detailAsset.type === 'pdf' && (
+            <div className="dump-view__detail-actions">
+              <a className="dump-view__download" href={detailAsset.src} download>
+                download pdf
+              </a>
+            </div>
+          )}
         </aside>
       )}
-
-      <div className="dump-view__coming-soon" onClick={(event) => event.stopPropagation()}>
-        <p className="dump-view__coming-soon-label">playground</p>
-        <div className="dump-view__marquee" aria-label="under construction">
-          <div className="dump-view__marquee-track" aria-hidden="true">
-            <span>under construction</span>
-            <span>under construction</span>
-            <span>under construction</span>
-            <span>under construction</span>
-          </div>
-        </div>
-        <p>experiments, sketches, and side projects will be here soon.</p>
-      </div>
     </section>
   );
 }

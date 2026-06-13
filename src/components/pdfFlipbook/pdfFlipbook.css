@@ -1,0 +1,135 @@
+.pdf-flipbook {
+  clear: both;
+  margin-bottom: 14px;
+}
+
+.pdf-flipbook__pager {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.pdf-flipbook__pager button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  width: 32px;
+}
+
+.pdf-flipbook__pager button:hover,
+.pdf-flipbook__pager button:focus-visible {
+  border-color: rgba(0, 0, 0, 0.55);
+  outline: none;
+}
+
+.pdf-flipbook__pager button:disabled {
+  border-color: rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.28);
+  cursor: default;
+}
+
+.pdf-flipbook__pager span {
+  min-width: 48px;
+  color: rgba(0, 0, 0, 0.52);
+  font-size: 11px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.pdf-flipbook__book {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  overflow: hidden;
+  height: min(43vh, 500px);
+  min-height: 300px;
+  padding: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  border-radius: 6px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent calc(50% - 1px),
+      rgba(0, 0, 0, 0.16) calc(50% - 1px),
+      rgba(0, 0, 0, 0.16) calc(50% + 1px),
+      transparent calc(50% + 1px)
+    ),
+    #f4f4f1;
+  box-shadow:
+    inset 0 0 28px rgba(0, 0, 0, 0.08),
+    0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-flipbook__sheet {
+  overflow: hidden;
+  border-radius: 3px;
+  background: white;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.12);
+}
+
+.pdf-flipbook__sheet:only-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(50%, 360px);
+}
+
+.pdf-flipbook__page {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: white;
+  transform-origin: left center;
+  animation: pdf-page-next 220ms ease both;
+}
+
+.pdf-flipbook__book[data-direction="previous"] .pdf-flipbook__page {
+  transform-origin: right center;
+  animation-name: pdf-page-previous;
+}
+
+@keyframes pdf-page-next {
+  from {
+    opacity: 0.45;
+    transform: perspective(900px) rotateY(-7deg) translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(900px) rotateY(0) translateX(0);
+  }
+}
+
+@keyframes pdf-page-previous {
+  from {
+    opacity: 0.45;
+    transform: perspective(900px) rotateY(7deg) translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(900px) rotateY(0) translateX(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .pdf-flipbook__pager {
+    justify-content: center;
+  }
+
+  .pdf-flipbook__book {
+    height: 44vh;
+    min-height: 260px;
+  }
+}
