@@ -251,23 +251,6 @@
   padding: 0 10px;
 }
 
-.dump-view__detail-media {
-  clear: both;
-  overflow: hidden;
-  margin-bottom: 14px;
-  max-height: 56vh;
-  border-radius: 6px;
-  background: #eee;
-}
-
-.dump-view__detail-media img,
-.dump-view__detail-media video {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 .dump-view__detail-id {
   display: block;
   margin-bottom: 8px;

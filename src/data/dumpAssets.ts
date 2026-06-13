@@ -6,6 +6,7 @@ export type DumpAsset = {
   alt?: string;
   mediaWidth?: number;
   mediaHeight?: number;
+  collectionId?: string;
   description: string;
   tags: string[];
   x: number;
@@ -20,6 +21,7 @@ export const dumpAssets: DumpAsset[] = [
     title: "Brief Builder Motion",
     type: "video",
     src: "/videos/briefnew.mov",
+    collectionId: "brief-builder",
     description:
       "**Motion prototype** for a [brief-building flow](https://example.com).\n- supports multiple lines\n- supports simple list items",
     tags: ["prototype", "interface", "motion"],
@@ -82,6 +84,7 @@ export const dumpAssets: DumpAsset[] = [
     title: "Brief Controls Pass",
     type: "video",
     src: "/videos/brief2.mov",
+    collectionId: "brief-builder",
     description: "alternate brief interaction pass with denser controls",
     tags: ["prototype", "interface"],
     x: 1200,

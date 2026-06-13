@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -9,6 +10,7 @@ import {
 } from 'react';
 import { TransformComponent, TransformWrapper, useControls } from 'react-zoom-pan-pinch';
 import { dumpAssets, type DumpAsset } from '../../data/dumpAssets';
+import MediaCarousel from '../mediaCarousel/MediaCarousel';
 import './dump.css';
 
 type PositionedDumpAsset = DumpAsset & {
@@ -43,14 +45,6 @@ function getWorldSize(items: PositionedDumpAsset[]) {
   const height = Math.max(...items.map((item) => item.layoutY + item.width * 0.75), 1250) + 260;
 
   return { width, height };
-}
-
-function getAssetAspectRatio(asset: DumpAsset) {
-  if (asset.mediaWidth && asset.mediaHeight) {
-    return `${asset.mediaWidth} / ${asset.mediaHeight}`;
-  }
-
-  return '16 / 9';
 }
 
 function renderDumpMarkup(content: string) {
@@ -117,6 +111,7 @@ function DumpControls() {
 function Dump() {
   const [activeTags, setActiveTags] = useState<Set<string>>(() => new Set());
   const [selectedAsset, setSelectedAsset] = useState<DumpAsset | null>(null);
+  const [activeDetailAsset, setActiveDetailAsset] = useState<DumpAsset | null>(null);
   const pointerStartRef = useRef<{ assetId: string; x: number; y: number } | null>(null);
 
   const tags = useMemo(() => (
@@ -138,6 +133,24 @@ function Dump() {
   ), [activeTags.size, visibleAssets]);
 
   const worldSize = useMemo(() => getWorldSize(positionedAssets), [positionedAssets]);
+
+  const detailAssets = useMemo(() => {
+    if (!selectedAsset) {
+      return [];
+    }
+
+    if (!selectedAsset.collectionId) {
+      return [selectedAsset];
+    }
+
+    return dumpAssets.filter((asset) => asset.collectionId === selectedAsset.collectionId);
+  }, [selectedAsset]);
+
+  const detailAsset = activeDetailAsset ?? selectedAsset;
+
+  useEffect(() => {
+    setActiveDetailAsset(selectedAsset);
+  }, [selectedAsset]);
 
   function toggleTag(tag: string) {
     setSelectedAsset(null);
@@ -288,10 +301,10 @@ function Dump() {
         <div className="dump-view__modal-overlay" aria-hidden="true" />
       )}
 
-      {selectedAsset && (
+      {selectedAsset && detailAsset && (
         <aside
           className="dump-view__detail"
-          aria-label={`${selectedAsset.title} details`}
+          aria-label={`${detailAsset.title} details`}
           onClick={(event) => event.stopPropagation()}
         >
           <button
@@ -302,30 +315,19 @@ function Dump() {
           >
             close
           </button>
-          <div
-            className="dump-view__detail-media"
-            style={{ aspectRatio: getAssetAspectRatio(selectedAsset) }}
-          >
-            {selectedAsset.type === 'video' ? (
-              <video
-                src={selectedAsset.src}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-              />
-            ) : (
-              <img src={selectedAsset.src} alt={selectedAsset.alt ?? ''} />
-            )}
-          </div>
-          <span className="dump-view__detail-id">{selectedAsset.id}</span>
-          <h2>{selectedAsset.title}</h2>
+          <MediaCarousel
+            key={selectedAsset.id}
+            items={detailAssets}
+            initialItemId={selectedAsset.id}
+            onActiveItemChange={setActiveDetailAsset}
+          />
+          <span className="dump-view__detail-id">{detailAsset.id}</span>
+          <h2>{detailAsset.title}</h2>
           <div className="dump-markup dump-markup--detail">
-            {renderDumpMarkup(selectedAsset.description)}
+            {renderDumpMarkup(detailAsset.description)}
           </div>
           <div className="dump-view__detail-tags">
-            {selectedAsset.tags.map((tag) => (
+            {detailAsset.tags.map((tag) => (
               <span key={tag}>{tag}</span>
             ))}
           </div>
