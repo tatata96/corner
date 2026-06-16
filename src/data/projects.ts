@@ -45,8 +45,9 @@ export const projects: Project[] = [
     type: "project",
     id: "photify",
     title: "Photify",
-    year: "2024",
-    medium: "product design, frontend development, backend development, product ownership",
+    year: "2026",
+    medium:
+      "product design, mobile development, Expo, frontend development, backend development, AI face recognition, product ownership",
     description:
       "A photo-sharing app with AI face recognition that I owned from start to finish, leading the design and building both the frontend and backend experience.",
     links: [
@@ -59,14 +60,14 @@ export const projects: Project[] = [
     images: photifyImages,
     color: "#F3EDE6",
     accent: "#2E241E",
-    tags: ["WORK", "PRODUCT", "FULL STACK", "AI"],
+    tags: ["WORK", "PRODUCT", "MOBILE", "EXPO", "FULL STACK", "AI FACE RECOGNITION"],
   },
   {
     type: "project",
     id: "brik-application",
     title: "Brik",
     year: "2024–2025",
-    medium: "React Native, Expo, AI learning product, mobile development",
+    medium: "Frontend developer, React Native, Expo, AI learning product, mobile development",
     description:
       "Built key features for a React Native learning app, including AI-assisted course experiences, progress tracking, and gamification systems, while helping shape the product from early design to release.",
     links: [
