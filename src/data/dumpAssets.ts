@@ -84,6 +84,18 @@ export const dumpAssets: DumpAsset[] = [
     width: 280,
   },
   {
+    id: "daniel",
+    title: "Daniel Jaeger Music",
+    type: "video",
+    src: "/videos/daniel.mov",
+    description:
+      "A freelance website for producer Daniel Jaeger, inspired by a DJ deck setup and built as a focused home for his music, production work, and booking contact: [danieljaegermusic.com](https://danieljaegermusic.com/).",
+    tags: ["interfaces", "digital"],
+    x: 1540,
+    y: 240,
+    width: 390,
+  },
+  {
     id: "work",
     title: "Where My Drawings Lived",
     type: "video",
@@ -94,6 +106,18 @@ export const dumpAssets: DumpAsset[] = [
     x: 1390,
     y: 560,
     width: 340,
+  },
+  {
+    id: "web",
+    title: "Old Website Landing Page",
+    type: "video",
+    src: "/videos/web.mov",
+    description:
+      "A recording of my old website's landing page. It used p5.js to make the typography react to the mouse, shifting the page from a static portfolio intro into a small interactive type experiment.",
+    tags: ["motion", "interfaces", "digital"],
+    x: 930,
+    y: 840,
+    width: 360,
   },
   {
     id: "istanbul",

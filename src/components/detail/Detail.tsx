@@ -72,7 +72,8 @@ function renderMarkdown(content: string) {
 function Detail({ item, onClose }: DetailProps) {
   const visualImage = item.type === 'article' ? item.image : undefined;
   const visualVideo = item.type === 'article' ? item.video : undefined;
-  const hasVisual = item.type === 'project' || Boolean(visualImage || visualVideo);
+  const hasVisual = item.type === 'article' && Boolean(visualImage || visualVideo);
+  const projectImages = item.type === 'project' ? item.images ?? [] : [];
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -94,11 +95,26 @@ function Detail({ item, onClose }: DetailProps) {
             {item.type === 'article' ? item.date : `${item.year} — ${item.medium}`}
           </p>
 
+          {item.type === 'project' && (
+            <div className="detail-heading__project-copy">
+              <p className="detail-desc">{item.description}</p>
+              {item.links && item.links.length > 0 && (
+                <div className="detail-links" aria-label={`${item.title} links`}>
+                  {item.links.map((link) => (
+                    <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
           {hasVisual && (
             <div
               className="detail-visual"
               style={{
-                background: visualImage ? `url(${visualImage}) center / cover` : item.color,
+                background: visualImage ? `url(${visualImage}) center / cover` : item.image ? `url(${item.image}) center / cover` : item.color,
               }}
             >
               {visualVideo ? (
@@ -121,8 +137,14 @@ function Detail({ item, onClose }: DetailProps) {
         <main className="detail-body">
           {item.type === 'article' ? (
             <div className="detail-markdown">{renderMarkdown(item.content)}</div>
+          ) : projectImages.length > 0 ? (
+            <div className="detail-gallery" aria-label={`${item.title} gallery`}>
+              {projectImages.map((image) => (
+                <img key={image} src={image} alt="" loading="lazy" />
+              ))}
+            </div>
           ) : (
-            <p className="detail-desc">{item.description}</p>
+            null
           )}
         </main>
       </div>

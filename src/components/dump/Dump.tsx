@@ -23,7 +23,7 @@ type PositionedDumpAsset = DumpAsset & {
   layoutY: number;
 };
 
-const DUMP_INITIAL_SCALE = 0.42;
+const DUMP_INITIAL_SCALE = 0.62;
 
 function getDumpViewportSize() {
   if (typeof window === "undefined") {

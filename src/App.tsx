@@ -4,6 +4,7 @@ import Header from './components/header/Header';
 import About from './components/about/About';
 import PaleBlueDot from './components/paleBlueDot/PaleBlueDot';
 import Feed from './components/feed/Feed';
+import Works from './components/works/Works';
 import Detail from './components/detail/Detail';
 import Dump from './components/dump/Dump';
 import MouseTagTrail from './components/mouseTagTrail/MouseTagTrail';
@@ -17,12 +18,13 @@ const items: ContentItem[] = [...projects, ...articles];
 const viewPaths: Record<ViewMode, string> = {
   about: '/about',
   feed: '/writing',
+  works: '/works',
   'pale-blue-dot': '/pale-blue-dot',
   dump: '/playground',
 };
 
 function getItemPath(item: ContentItem) {
-  return item.type === 'article' ? `/writing/${item.id}` : `/projects/${item.id}`;
+  return `/writing/${item.id}`;
 }
 
 function findItem(type: ContentItem['type'], id: string) {
@@ -53,9 +55,12 @@ function getRouteFromLocation() {
     return { view: 'feed' as const, selectedItem };
   }
 
+  if (segments[0] === 'works') {
+    return { view: 'works' as const, selectedItem: null };
+  }
+
   if (segments[0] === 'projects') {
-    const selectedItem = segments[1] ? findItem('project', segments[1]) : null;
-    return { view: 'feed' as const, selectedItem };
+    return { view: 'works' as const, selectedItem: null };
   }
 
   return { view: null, selectedItem: null };
@@ -98,7 +103,7 @@ function App() {
   }
 
   function handleSelectItem(item: ContentItem) {
-    setView('feed');
+    setView(item.type === 'article' ? 'feed' : 'works');
     setSelectedItem(item);
     pushRoute(getItemPath(item));
   }
@@ -157,11 +162,12 @@ function App() {
       <div className={`app__overlay${view ? ' app__overlay--open' : ''}`} onClick={handleClose}>
         {view === 'about' && <About />}
         {view === 'pale-blue-dot' && <PaleBlueDot />}
-        {view === 'feed' && <Feed projects={projects} articles={articles} onSelect={handleSelectItem} />}
+        {view === 'feed' && <Feed projects={[]} articles={articles} onSelect={handleSelectItem} />}
+        {view === 'works' && <Works projects={projects} />}
         {view === 'dump' && <Dump />}
       </div>
 
-      {selectedItem && (
+      {selectedItem?.type === 'article' && (
         <Detail item={selectedItem} onClose={handleCloseDetail} />
       )}
     </div>
