@@ -84,6 +84,18 @@ export const dumpAssets: DumpAsset[] = [
     width: 280,
   },
   {
+    id: "daniel",
+    title: "Daniel Jaeger Music",
+    type: "video",
+    src: "/videos/daniel.mov",
+    description:
+      "A freelance website for producer Daniel Jaeger, inspired by a DJ deck setup and built as a focused home for his music, production work, and booking contact: [danieljaegermusic.com](https://danieljaegermusic.com/).",
+    tags: ["interfaces", "digital", "music"],
+    x: 1540,
+    y: 240,
+    width: 390,
+  },
+  {
     id: "work",
     title: "Where My Drawings Lived",
     type: "video",
