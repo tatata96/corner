@@ -71,21 +71,6 @@
   pointer-events: none;
 }
 
-.card--feed .card__media-wrap::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(
-    to bottom right,
-    transparent calc(50% - 0.5px),
-    var(--card-border) calc(50% - 0.5px),
-    var(--card-border) calc(50% + 0.5px),
-    transparent calc(50% + 0.5px)
-  );
-}
-
 .card__content {
   display: flex;
   flex-direction: column;
