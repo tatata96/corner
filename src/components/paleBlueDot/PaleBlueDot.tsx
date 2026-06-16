@@ -29,8 +29,6 @@ function PaleBlueDot() {
   return (
     <section className="pale-blue-dot-view">
       <article className="pale-blue-dot-panel" onClick={(e) => e.stopPropagation()}>
-        <div className="pale-blue-dot-panel__diagonal" aria-hidden="true" />
-
         <span className="pale-blue-dot-panel__label">pale blue dot</span>
         <div className="pale-blue-dot-panel__body">
           {COLORIZED_PARAGRAPHS.map((paragraph, paragraphIndex) => (
