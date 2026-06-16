@@ -24,7 +24,7 @@ const viewPaths: Record<ViewMode, string> = {
 };
 
 function getItemPath(item: ContentItem) {
-  return item.type === 'article' ? `/writing/${item.id}` : `/projects/${item.id}`;
+  return `/writing/${item.id}`;
 }
 
 function findItem(type: ContentItem['type'], id: string) {
@@ -60,8 +60,7 @@ function getRouteFromLocation() {
   }
 
   if (segments[0] === 'projects') {
-    const selectedItem = segments[1] ? findItem('project', segments[1]) : null;
-    return { view: 'works' as const, selectedItem };
+    return { view: 'works' as const, selectedItem: null };
   }
 
   return { view: null, selectedItem: null };
@@ -111,7 +110,7 @@ function App() {
 
   function handleCloseDetail() {
     setSelectedItem(null);
-    pushRoute(selectedItem?.type === 'project' ? viewPaths.works : viewPaths.feed);
+    pushRoute(viewPaths.feed);
   }
 
   const mouseTrailActive = view === null && selectedItem === null;
@@ -164,11 +163,11 @@ function App() {
         {view === 'about' && <About />}
         {view === 'pale-blue-dot' && <PaleBlueDot />}
         {view === 'feed' && <Feed projects={[]} articles={articles} onSelect={handleSelectItem} />}
-        {view === 'works' && <Works projects={projects} onSelect={handleSelectItem} />}
+        {view === 'works' && <Works projects={projects} />}
         {view === 'dump' && <Dump />}
       </div>
 
-      {selectedItem && (
+      {selectedItem?.type === 'article' && (
         <Detail item={selectedItem} onClose={handleCloseDetail} />
       )}
     </div>
