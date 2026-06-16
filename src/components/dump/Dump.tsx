@@ -412,8 +412,10 @@ function Dump() {
                 )}
                 <figcaption className="dump-view__tooltip">
                   <span>{asset.title}</span>
-                  <div className="dump-markup dump-markup--tooltip">
-                    {renderDumpMarkup(asset.description)}
+                  <div className="dump-view__tooltip-tags">
+                    {asset.tags.map((tag) => (
+                      <small key={tag}>{tag}</small>
+                    ))}
                   </div>
                 </figcaption>
               </figure>
@@ -454,7 +456,6 @@ function Dump() {
               onActiveItemChange={(item) => setActiveDetailAsset(item)}
             />
           )}
-          <span className="dump-view__detail-id">{detailAsset.id}</span>
           <h2>{detailAsset.title}</h2>
           <div className="dump-markup dump-markup--detail">
             {renderDumpMarkup(detailAsset.description)}
