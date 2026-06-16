@@ -96,6 +96,18 @@ export const dumpAssets: DumpAsset[] = [
     width: 340,
   },
   {
+    id: "web",
+    title: "Old Website Landing Page",
+    type: "video",
+    src: "/videos/web.mov",
+    description:
+      "A recording of my old website's landing page. It used p5.js to make the typography react to the mouse, shifting the page from a static portfolio intro into a small interactive type experiment.",
+    tags: ["motion", "interfaces", "digital"],
+    x: 930,
+    y: 840,
+    width: 360,
+  },
+  {
     id: "istanbul",
     title: "Istanbul Photography Project",
     type: "video",
