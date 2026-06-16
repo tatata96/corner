@@ -165,6 +165,7 @@ function DumpControls() {
 function Dump() {
   const [activeTags, setActiveTags] = useState<Set<string>>(() => new Set());
   const [viewportSize, setViewportSize] = useState(getDumpViewportSize);
+  const [showIntroOverlay, setShowIntroOverlay] = useState(true);
   const [selectedAsset, setSelectedAsset] = useState<DumpAsset | null>(null);
   const [activeDetailAsset, setActiveDetailAsset] = useState<DumpAsset | null>(
     null,
@@ -423,6 +424,36 @@ function Dump() {
           </div>
         </TransformComponent>
       </TransformWrapper>
+
+      {showIntroOverlay && (
+        <div
+          className="dump-view__coming-soon"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <p className="dump-view__coming-soon-label">a loose archive of</p>
+          <div
+            className="dump-view__marquee"
+            aria-label="side projects, visual experiments"
+          >
+            <div className="dump-view__marquee-track" aria-hidden="true">
+              <span>side projects, visual experiments,</span>
+              <span>side projects, visual experiments,</span>
+              <span>side projects, visual experiments,</span>
+              <span>side projects, visual experiments,</span>
+            </div>
+          </div>
+          <p className="dump-view__coming-soon-note">
+            and things made while thinking through design.
+          </p>
+          <button
+            type="button"
+            className="dump-view__enter"
+            onClick={() => setShowIntroOverlay(false)}
+          >
+            enter
+          </button>
+        </div>
+      )}
 
       {selectedAsset && (
         <div className="dump-view__modal-overlay" aria-hidden="true" />

@@ -1,6 +1,6 @@
-import './nav.css';
+import "./nav.css";
 
-export type ViewMode = 'about' | 'feed' | 'pale-blue-dot' | 'dump';
+export type ViewMode = "about" | "feed" | "pale-blue-dot" | "dump";
 
 interface NavProps {
   view: ViewMode | null;
@@ -8,22 +8,24 @@ interface NavProps {
   onHome: () => void;
 }
 
-function Nav({ view, onViewChange, onHome }: NavProps) {
+function Nav({view, onViewChange, onHome}: NavProps) {
   return (
     <nav className="nav">
-      <button className="nav__name" onClick={onHome}>tamara kozok</button>
+      <button className="nav__name" onClick={onHome}>
+        tamara kozok
+      </button>
 
       <div className="nav__views">
         <button
-          className={`nav__view-btn${view === 'feed' ? ' nav__view-btn--active' : ''}`}
-          onClick={() => onViewChange('feed')}
+          className={`nav__view-btn${view === "feed" ? " nav__view-btn--active" : ""}`}
+          onClick={() => onViewChange("feed")}
         >
           writing
         </button>
 
         <button
-          className={`nav__view-btn nav__view-btn--playground${view === 'dump' ? ' nav__view-btn--active' : ''}`}
-          onClick={() => onViewChange('dump')}
+          className={`nav__view-btn nav__view-btn--playground${view === "dump" ? " nav__view-btn--active" : ""}`}
+          onClick={() => onViewChange("dump")}
           data-note="a loose archive of side projects, interface studies, motion sketches, visual experiments, and things made while thinking through design."
           aria-label="playground: a loose archive of side projects, interface studies, motion sketches, visual experiments, and things made while thinking through design."
         >
@@ -31,8 +33,8 @@ function Nav({ view, onViewChange, onHome }: NavProps) {
         </button>
 
         <button
-          className={`nav__view-btn${view === 'about' ? ' nav__view-btn--active' : ''}`}
-          onClick={() => onViewChange('about')}
+          className={`nav__view-btn${view === "about" ? " nav__view-btn--active" : ""}`}
+          onClick={() => onViewChange("about")}
         >
           about
         </button>
@@ -57,7 +59,9 @@ function Nav({ view, onViewChange, onHome }: NavProps) {
           linkedin
         </a>
 
-        <a href="mailto:tamarakozok@gmail.com" className="nav__link">email</a>
+        <a href="mailto:tamarakozok@gmail.com" className="nav__link">
+          email
+        </a>
       </div>
     </nav>
   );
