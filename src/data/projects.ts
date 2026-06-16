@@ -31,7 +31,35 @@ const brikImages = [
   "/brik/Screenshot%202026-06-16%20at%2014.24.26.png",
 ];
 
+const photifyImages = [
+  "/photify/phot1.jpeg",
+  "/photify/phot2.jpeg",
+  "/photify/phot3.jpeg",
+  "/photify/phot4.jpeg",
+  "/photify/phot5.jpg",
+];
+
 export const projects: Project[] = [
+  {
+    type: "project",
+    id: "photify",
+    title: "Photify",
+    year: "2024",
+    medium: "product design, frontend development, backend development, product ownership",
+    description:
+      "A photo-sharing app with AI face recognition that I owned from start to finish, leading the design and building both the frontend and backend experience.",
+    links: [
+      {
+        label: "Photify",
+        href: "https://www.photify.studio/",
+      },
+    ],
+    image: photifyImages[0],
+    images: photifyImages,
+    color: "#F3EDE6",
+    accent: "#2E241E",
+    tags: ["WORK", "PRODUCT", "FULL STACK", "AI"],
+  },
   {
     type: "project",
     id: "brik-application",
