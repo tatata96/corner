@@ -8,9 +8,9 @@ function About() {
         <h2 className="about-panel__title">tamara kozok</h2>
         <div className="about-panel__body">
           <p>
-            I’m a frontend developer moving toward the more creative side of the
-            web. I like building visual interfaces, interactive tools, motion
-            experiments.
+            Welcome to my corner of the web. I’m a frontend developer moving
+            toward the more creative side of the web. I like building visual
+            interfaces, interactive tools, motion experiments.
           </p>
           <p>
             My work sits between interface design, creative coding, motion, and
