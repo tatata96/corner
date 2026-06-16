@@ -232,7 +232,7 @@
   min-width: 118px;
   min-height: 40px;
   padding: 0 22px;
-  border: 3px solid #111;
+  border: 1px solid #111;
   border-radius: 28px 34px 30px 26px;
   background: white;
   box-shadow: 0 12px 22px rgba(0, 0, 0, 0.12);
@@ -249,7 +249,7 @@
   content: "";
   position: absolute;
   z-index: -1;
-  border: 3px solid #111;
+  border: 1px solid #111;
   border-bottom-color: white;
   background: white;
 }
