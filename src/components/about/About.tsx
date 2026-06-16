@@ -1,22 +1,50 @@
-import './about.css';
+import "./about.css";
 
 function About() {
   return (
     <section className="about-view">
       <article className="about-panel" onClick={(e) => e.stopPropagation()}>
-        <div className="about-panel__diagonal" aria-hidden="true" />
-
         <span className="about-panel__label">about</span>
         <h2 className="about-panel__title">tamara kozok</h2>
         <div className="about-panel__body">
-          <p>I build for the web, mostly with React and TypeScript.</p>
-          <p>Across Web3 tools, dashboards, and mobile apps,<br />I’ve worked on making complex things feel a little more simple ,a little easier to understand.</p>
-          <p>Developer interfaces, data-heavy views,<br />and some mobile work with React Native along the way.</p>
-          <p>I also care about design —<br />mostly how things feel,<br />how they come together,<br />and how little details add up.</p>
-          <p>I tend to learn by doing.<br />Figuring things out as I go,<br />asking questions when needed,<br />and working closely with others to get things into production.</p>
-          <p>Lately, I’ve been thinking about how AI shows up in products —<br />and how to keep it clear, usable, and not overwhelming.</p>
-<br />
-          On a small dot, details still matter.
+          <p>
+            Welcome to my corner of the web. I’m a frontend developer moving
+            toward the more creative side of the web. I like building visual
+            interfaces, interactive tools, motion experiments.
+          </p>
+          <p>
+            My work sits between interface design, creative coding, motion, and
+            web development. I’m interested in websites that feel particular,
+            alive, not just functional.
+          </p>
+
+          <div className="about-panel__sections">
+            <section>
+              <h3>Experience</h3>
+              <p>
+                Web3, DeFi, fintech, AI-driven products, education, mobile apps,
+                design systems, wallet flows, internal tools.
+              </p>
+            </section>
+
+            <section>
+              <h3>Interests</h3>
+              <p>
+                visual interfaces, motion, typography, digital archives,
+                creative coding, web experiments, design systems, editorial
+                layouts.
+              </p>
+            </section>
+
+            <section>
+              <h3>Toolkit</h3>
+              <p>
+                React, Next.js, React Native, Expo, TypeScript, JavaScript, CSS,
+                Tailwind CSS, ShadCN, Figma, GitHub, Firebase, Sentry, Cursor,
+                Claude.
+              </p>
+            </section>
+          </div>
         </div>
 
         <div className="about-panel__links">
