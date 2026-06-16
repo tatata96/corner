@@ -41,7 +41,7 @@ function About() {
               <p>
                 React, Next.js, React Native, Expo, TypeScript, JavaScript, CSS,
                 Tailwind CSS, ShadCN, Figma, GitHub, Firebase, Sentry, Cursor,
-                Cursor, Claude.
+                Claude.
               </p>
             </section>
           </div>
