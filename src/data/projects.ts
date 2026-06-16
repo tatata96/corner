@@ -28,6 +28,7 @@ const brikImages = [
   "/brik/IMG_4479.PNG",
   "/brik/IMG_4480.PNG",
   "/brik/IMG_4481.PNG",
+  "/brik/brik.jpeg",
   "/brik/Screenshot%202026-06-16%20at%2014.24.26.png",
 ];
 
