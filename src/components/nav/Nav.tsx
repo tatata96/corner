@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./nav.css";
 
-export type ViewMode = "about" | "feed" | "works" | "pale-blue-dot" | "dump";
+export type ViewMode = "feed" | "works" | "pale-blue-dot" | "dump";
 
 interface NavProps {
   view: ViewMode | null;
@@ -39,9 +39,12 @@ function Nav({view, onViewChange, onHome}: NavProps) {
 
   return (
     <nav className={`nav${menuOpen ? " nav--menu-open" : ""}`}>
-      <button className="nav__name" onClick={handleHome}>
-        tamara kozok
-      </button>
+      <div className="nav__name-wrap">
+        <button className="nav__name" onClick={handleHome}>
+          tamara kozok
+        </button>
+        <img className="nav__me" src="/me.png" alt="Tamara Kozok" />
+      </div>
 
       <button
         type="button"
@@ -78,12 +81,6 @@ function Nav({view, onViewChange, onHome}: NavProps) {
           playground
         </button>
 
-        <button
-          className={`nav__view-btn${view === "about" ? " nav__view-btn--active" : ""}`}
-          onClick={() => handleView("about")}
-        >
-          about
-        </button>
       </div>
 
       <div className="nav__links">
@@ -130,12 +127,6 @@ function Nav({view, onViewChange, onHome}: NavProps) {
               onClick={() => handleView("dump")}
             >
               playground
-            </button>
-            <button
-              className={`nav__mobile-item${view === "about" ? " nav__mobile-item--active" : ""}`}
-              onClick={() => handleView("about")}
-            >
-              about
             </button>
           </div>
 

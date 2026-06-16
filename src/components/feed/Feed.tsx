@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import type { Article } from '../../data/articles';
 import type { ContentItem } from '../../data/content';
 import type { Project } from '../../data/projects';
-import FilterBar from '../filterBar/FilterBar';
+// import { useState } from 'react';
+// import FilterBar from '../filterBar/FilterBar';
 import ProjectCard from '../projectCard/ProjectCard';
-import { createTagColorMap } from '../../utils/tagColors';
+// import { createTagColorMap } from '../../utils/tagColors';
 import './feed.css';
 
 interface FeedProps {
@@ -14,47 +14,44 @@ interface FeedProps {
 }
 
 function Feed({ projects, articles, onSelect }: FeedProps) {
-  const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
+  // TODO: Re-enable writing filters when the filtering UX is ready.
+  // const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
 
   const items: ContentItem[] = [...projects, ...articles];
 
-  const allTags = Array.from(
-    new Set(items.flatMap((item) => item.tags))
-  ).sort();
-  const tagColorMap = createTagColorMap(allTags);
+  // const allTags = Array.from(
+  //   new Set(items.flatMap((item) => item.tags))
+  // ).sort();
+  // const tagColorMap = createTagColorMap(allTags);
 
-  const visibleItems =
-    activeTags.size === 0
-      ? items
-      : items.filter((item) =>
-          Array.from(activeTags).every((tag) => item.tags.includes(tag))
-        );
+  const visibleItems = items;
 
-  function handleToggle(tag: string) {
-    setActiveTags((prev) => {
-      const next = new Set(prev);
-      if (next.has(tag)) {
-        next.delete(tag);
-      } else {
-        next.add(tag);
-      }
-      return next;
-    });
-  }
+  // function handleToggle(tag: string) {
+  //   setActiveTags((prev) => {
+  //     const next = new Set(prev);
+  //     if (next.has(tag)) {
+  //       next.delete(tag);
+  //     } else {
+  //       next.add(tag);
+  //     }
+  //     return next;
+  //   });
+  // }
 
-  function handleClear() {
-    setActiveTags(new Set());
-  }
+  // function handleClear() {
+  //   setActiveTags(new Set());
+  // }
 
   return (
     <section className="feed-view">
-      <FilterBar
+      {/* TODO: Re-enable writing filters when the filtering UX is ready. */}
+      {/* <FilterBar
         tags={allTags}
         tagColorMap={tagColorMap}
         activeTags={activeTags}
         onToggle={handleToggle}
         onClear={handleClear}
-      />
+      /> */}
       {visibleItems.length === 0 ? (
         <div className="feed-view__empty">no items match the selected filters</div>
       ) : (

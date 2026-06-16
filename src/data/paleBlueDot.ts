@@ -16,13 +16,13 @@ It has been said that astronomy is a humbling and character-building experience.
 export const PALE_BLUE_DOT_TEXT = RAW;
 
 export const PALE_BLUE_DOT_COLOR_GROUPS = [
-  'rgb(186 203 0)',
-  '#00ff66',
-  '#00aaff',
-  '#ff00aa',
-  '#ff8800',
-  '#ccff00',
-  '#aa66ff',
+  "rgb(186 203 0)",
+  "#00ff66",
+  "#00aaff",
+  "#ff00aa",
+  "#ff8800",
+  "#60c361",
+  "#aa66ff",
 ] as const;
 
 export type PaleBlueDotWord = {
@@ -32,19 +32,22 @@ export type PaleBlueDotWord = {
 };
 
 function buildTaggedWords(source: string): PaleBlueDotWord[] {
-  const normalized = source.replace(/\s+/g, ' ').trim();
+  const normalized = source.replace(/\s+/g, " ").trim();
   const out: PaleBlueDotWord[] = [];
   let colorGroupIndex = 0;
   const words = normalized.split(/\s+/).filter(Boolean);
   for (const word of words) {
-    out.push({ word, colorGroupIndex });
+    out.push({word, colorGroupIndex});
     if (/[.,]$/.test(word)) colorGroupIndex += 1;
   }
   return out;
 }
 
 /** Words in reading order with punctuation grouping for styling. */
-export const PALE_BLUE_DOT_TAGGED: readonly PaleBlueDotWord[] = buildTaggedWords(RAW);
+export const PALE_BLUE_DOT_TAGGED: readonly PaleBlueDotWord[] =
+  buildTaggedWords(RAW);
 
 /** Plain word list (same order as `PALE_BLUE_DOT_TAGGED`). */
-export const PALE_BLUE_DOT_WORDS: readonly string[] = PALE_BLUE_DOT_TAGGED.map((w) => w.word);
+export const PALE_BLUE_DOT_WORDS: readonly string[] = PALE_BLUE_DOT_TAGGED.map(
+  (w) => w.word,
+);

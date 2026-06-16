@@ -7,7 +7,7 @@ interface WorksProps {
 
 function Works({ projects }: WorksProps) {
   return (
-    <section className="works-view">
+    <section className="works-view" onClick={(e) => e.stopPropagation()}>
       {projects.length === 0 ? (
         <div className="works-view__empty">works will live here</div>
       ) : (

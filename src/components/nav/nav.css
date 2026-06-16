@@ -12,6 +12,10 @@
   background: transparent;
 }
 
+.nav__name-wrap {
+  justify-self: start;
+}
+
 .nav__name {
   font-family: var(--font-display);
   font-size: 16px;
@@ -28,6 +32,28 @@
 
 .nav__name:hover {
   color: var(--ink-muted);
+}
+
+.nav__me {
+  position: fixed;
+  right: var(--space-md);
+  bottom: var(--space-md);
+  width: min(28vw, 260px);
+  max-height: min(42vh, 360px);
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(32px, 32px) rotate(2deg);
+  transform-origin: right bottom;
+  transition:
+    opacity 0.2s ease,
+    transform 0.24s ease;
+}
+
+.nav__name-wrap:hover .nav__me,
+.nav__name:focus-visible + .nav__me {
+  opacity: 1;
+  transform: translate(0, 0) rotate(0deg);
 }
 
 .nav__menu-toggle {
@@ -99,6 +125,10 @@
   .nav__name {
     position: relative;
     z-index: 2;
+  }
+
+  .nav__me {
+    display: none;
   }
 
   .nav__menu-toggle {

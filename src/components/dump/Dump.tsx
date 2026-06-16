@@ -238,6 +238,14 @@ function Dump() {
   }, [selectedAsset]);
 
   useEffect(() => {
+    const introTimer = window.setTimeout(() => {
+      setShowIntroOverlay(false);
+    }, 3000);
+
+    return () => window.clearTimeout(introTimer);
+  }, []);
+
+  useEffect(() => {
     function handleResize() {
       setViewportSize(getDumpViewportSize());
     }
@@ -445,13 +453,6 @@ function Dump() {
           <p className="dump-view__coming-soon-note">
             and things made while thinking through design.
           </p>
-          <button
-            type="button"
-            className="dump-view__enter"
-            onClick={() => setShowIntroOverlay(false)}
-          >
-            enter
-          </button>
         </div>
       )}
 

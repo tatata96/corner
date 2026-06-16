@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Nav, { type ViewMode } from './components/nav/Nav';
 import Header from './components/header/Header';
-import About from './components/about/About';
 import PaleBlueDot from './components/paleBlueDot/PaleBlueDot';
 import Feed from './components/feed/Feed';
 import Works from './components/works/Works';
@@ -16,7 +15,6 @@ import './App.css';
 const items: ContentItem[] = [...projects, ...articles];
 
 const viewPaths: Record<ViewMode, string> = {
-  about: '/about',
   feed: '/writing',
   works: '/works',
   'pale-blue-dot': '/pale-blue-dot',
@@ -36,10 +34,6 @@ function getRouteFromLocation() {
 
   if (segments.length === 0) {
     return { view: null, selectedItem: null };
-  }
-
-  if (segments[0] === 'about') {
-    return { view: 'about' as const, selectedItem: null };
   }
 
   if (segments[0] === 'pale-blue-dot') {
@@ -84,6 +78,12 @@ function App() {
   }
 
   function handleViewChange(next: ViewMode) {
+    if (selectedItem && view === next) {
+      setSelectedItem(null);
+      pushRoute(viewPaths[next]);
+      return;
+    }
+
     const nextView = view === next ? null : next;
     setView(nextView);
     setSelectedItem(null);
@@ -151,7 +151,7 @@ function App() {
     <div className="app">
       <Nav view={view} onViewChange={handleViewChange} onHome={handleClose} />
 
-      <Header onOpenPaleBlueDot={handleOpenPaleBlueDot} />
+      <Header onOpenPaleBlueDot={handleOpenPaleBlueDot} showAbout={mouseTrailActive} />
 
       {mouseTrailActive && <MouseTagTrail />}
 
@@ -160,7 +160,6 @@ function App() {
       )}
 
       <div className={`app__overlay${view ? ' app__overlay--open' : ''}`} onClick={handleClose}>
-        {view === 'about' && <About />}
         {view === 'pale-blue-dot' && <PaleBlueDot />}
         {view === 'feed' && <Feed projects={[]} articles={articles} onSelect={handleSelectItem} />}
         {view === 'works' && <Works projects={projects} />}
