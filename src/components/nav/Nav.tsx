@@ -15,13 +15,6 @@ function Nav({ view, onViewChange, onHome }: NavProps) {
 
       <div className="nav__views">
         <button
-          className={`nav__view-btn${view === 'about' ? ' nav__view-btn--active' : ''}`}
-          onClick={() => onViewChange('about')}
-        >
-          about
-        </button>
-
-        <button
           className={`nav__view-btn${view === 'feed' ? ' nav__view-btn--active' : ''}`}
           onClick={() => onViewChange('feed')}
         >
@@ -35,6 +28,13 @@ function Nav({ view, onViewChange, onHome }: NavProps) {
           aria-label="playground: a loose archive of side projects, interface studies, motion sketches, visual experiments, and things made while thinking through design."
         >
           playground
+        </button>
+
+        <button
+          className={`nav__view-btn${view === 'about' ? ' nav__view-btn--active' : ''}`}
+          onClick={() => onViewChange('about')}
+        >
+          about
         </button>
       </div>
 
