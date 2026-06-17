@@ -24,6 +24,8 @@ type PositionedDumpAsset = DumpAsset & {
 };
 
 const DUMP_INITIAL_SCALE = 0.62;
+const DUMP_INTRO_DURATION_MS = 3000;
+const DUMP_VIDEO_WARMUP_LIMIT = 4;
 
 function getDumpViewportSize() {
   if (typeof window === "undefined") {
@@ -162,6 +164,43 @@ function DumpControls() {
   );
 }
 
+function warmDumpMedia() {
+  const warmupAssets = dumpAssets
+    .filter((asset) => asset.type === "video")
+    .slice(0, DUMP_VIDEO_WARMUP_LIMIT);
+  const warmupVideos = warmupAssets.map((asset) => {
+    const video = document.createElement("video");
+
+    video.preload = "auto";
+    video.muted = true;
+    video.playsInline = true;
+    video.src = asset.src;
+    video.load();
+
+    return video;
+  });
+  const warmupImages = dumpAssets
+    .filter((asset) => asset.type === "image" || asset.coverSrc)
+    .map((asset) => {
+      const image = new Image();
+
+      image.decoding = "async";
+      image.src = asset.coverSrc ?? asset.src;
+
+      return image;
+    });
+
+  return () => {
+    warmupVideos.forEach((video) => {
+      video.removeAttribute("src");
+      video.load();
+    });
+    warmupImages.forEach((image) => {
+      image.src = "";
+    });
+  };
+}
+
 function Dump() {
   const [activeTags, setActiveTags] = useState<Set<string>>(() => new Set());
   const [viewportSize, setViewportSize] = useState(getDumpViewportSize);
@@ -238,11 +277,15 @@ function Dump() {
   }, [selectedAsset]);
 
   useEffect(() => {
+    const cleanupWarmup = warmDumpMedia();
     const introTimer = window.setTimeout(() => {
       setShowIntroOverlay(false);
-    }, 3000);
+    }, DUMP_INTRO_DURATION_MS);
 
-    return () => window.clearTimeout(introTimer);
+    return () => {
+      cleanupWarmup();
+      window.clearTimeout(introTimer);
+    };
   }, []);
 
   useEffect(() => {
@@ -410,11 +453,10 @@ function Dump() {
                 ) : asset.type === "video" ? (
                   <video
                     src={asset.src}
-                    autoPlay
                     muted
                     loop
                     playsInline
-                    preload="metadata"
+                    preload={showIntroOverlay ? "auto" : "metadata"}
                   />
                 ) : (
                   <img src={asset.src} alt={asset.alt ?? ""} />
