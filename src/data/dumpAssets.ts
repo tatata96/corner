@@ -91,8 +91,8 @@ export const dumpAssets: DumpAsset[] = [
     description:
       "A freelance website for producer Daniel Jaeger, inspired by a DJ deck setup and built as a focused home for his music, production work, and booking contact: [danieljaegermusic.com](https://danieljaegermusic.com/).",
     tags: ["interfaces", "digital"],
-    x: 1540,
-    y: 240,
+    x: 960,
+    y: 470,
     width: 390,
   },
   {
@@ -118,6 +118,18 @@ export const dumpAssets: DumpAsset[] = [
     x: 930,
     y: 840,
     width: 360,
+  },
+  {
+    id: "webb",
+    title: "Webb Landing Interaction",
+    type: "video",
+    src: "/videos/webb.mov",
+    description:
+      "A landing page experiment built around interaction. The piece was a quick study in making the first screen feel more alive through motion and responsive interface behavior.",
+    tags: ["motion", "interfaces", "digital"],
+    x: 1720,
+    y: 880,
+    width: 380,
   },
   {
     id: "istanbul",
