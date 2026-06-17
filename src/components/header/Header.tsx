@@ -10,10 +10,11 @@ function Header({onOpenPaleBlueDot, showAbout}: HeaderProps) {
     <header className="header">
       <div className="header__intro">
         <div className="header__title-group">
-          <h1 className="header__title">
+          <h1 className="header__title" tabIndex={0}>
             human
             <br />
             on a small dot
+            <img className="header__me" src="/me.png" alt="Tamara Kozok" />
           </h1>
 
           <button
