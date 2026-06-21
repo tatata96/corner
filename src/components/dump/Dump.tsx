@@ -316,14 +316,19 @@ function Dump() {
 
   function handleTileKeyDown(
     event: KeyboardEvent<HTMLElement>,
-    assetId: string,
+    asset: DumpAsset,
   ) {
     if (event.key !== "Enter" && event.key !== " ") {
       return;
     }
 
     event.preventDefault();
-    setSelectedAsset(dumpAssets.find((asset) => asset.id === assetId) ?? null);
+    if (asset.websiteUrl) {
+      window.open(asset.websiteUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    setSelectedAsset(asset);
   }
 
   function handleTilePointerDown(
@@ -349,6 +354,11 @@ function Dump() {
       : 0;
 
     if (pointerStart && pointerStart.assetId === asset.id && moved > 8) {
+      return;
+    }
+
+    if (asset.websiteUrl) {
+      window.open(asset.websiteUrl, "_blank", "noopener,noreferrer");
       return;
     }
 
@@ -431,12 +441,16 @@ function Dump() {
                 }}
                 role="button"
                 tabIndex={0}
-                aria-label={`Open ${asset.title}`}
+                aria-label={
+                  asset.websiteUrl
+                    ? `Visit ${asset.title} website`
+                    : `Open ${asset.title}`
+                }
                 onClick={(event) => openAsset(asset, event)}
                 onPointerDown={(event) =>
                   handleTilePointerDown(asset.id, event)
                 }
-                onKeyDown={(event) => handleTileKeyDown(event, asset.id)}
+                onKeyDown={(event) => handleTileKeyDown(event, asset)}
               >
                 {asset.type === "pdf" && asset.coverSrc ? (
                   <img src={asset.coverSrc} alt={asset.alt ?? ""} />

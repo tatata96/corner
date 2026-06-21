@@ -9,6 +9,7 @@ export type DumpAsset = {
   mediaHeight?: number;
   pageCount?: number;
   collectionId?: string;
+  websiteUrl?: string;
   description: string;
   tags: string[];
   x: number;
@@ -51,6 +52,7 @@ export const dumpAssets: DumpAsset[] = [
     title: "Gallery Universe",
     type: "video",
     src: "/videos/gallery-universe.mov",
+    websiteUrl: "https://tamaraelf.xyz/writing/a03",
     description:
       "A package I built to explore a different way of browsing large collections. The idea, process, and implementation are documented here: [tamaraelf.xyz/writing/a03](https://tamaraelf.xyz/writing/a03).",
     tags: ["motion", "interfaces", "digital"],
@@ -88,6 +90,7 @@ export const dumpAssets: DumpAsset[] = [
     title: "Daniel Jaeger Music",
     type: "video",
     src: "/videos/daniel.mov",
+    websiteUrl: "https://danieljaegermusic.com/",
     description:
       "A freelance website for producer Daniel Jaeger, inspired by a DJ deck setup and built as a focused home for his music, production work, and booking contact: [danieljaegermusic.com](https://danieljaegermusic.com/).",
     tags: ["interfaces", "digital"],
