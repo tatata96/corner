@@ -20,6 +20,18 @@ export type DumpAsset = {
 
 export const dumpAssets: DumpAsset[] = [
   {
+    id: "apartmento",
+    title: "Apartmento",
+    type: "video",
+    src: "/videos/apartmento.mov",
+    description:
+      "A landing page experiment for Apartmento, using GSAP to explore expressive motion and playful transitions.",
+    tags: ["motion", "interfaces", "digital"],
+    x: 360,
+    y: 1040,
+    width: 460,
+  },
+  {
     id: "titresim",
     title: "Titresim",
     type: "pdf",
