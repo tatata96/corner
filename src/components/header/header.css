@@ -137,13 +137,17 @@
   border: 0;
   background: transparent;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0;
   color: var(--ink-muted);
   cursor: pointer;
   pointer-events: auto;
   text-transform: lowercase;
+  text-decoration-line: underline;
+  text-decoration-color: rgb(189, 89, 105);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
 }
 
 .header__subtitle:hover {

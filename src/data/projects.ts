@@ -55,6 +55,10 @@ export const projects: Project[] = [
         label: "Photify",
         href: "https://www.photify.studio/",
       },
+      {
+        label: "PHOTIFY APP",
+        href: "https://apps.apple.com/tr/app/photify/id6779256503",
+      },
     ],
     image: photifyImages[0],
     images: photifyImages,
